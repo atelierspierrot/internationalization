@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>I18n\I18n | Internationalization</title>
+                    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../classes.html">Classes</a></li>
+                            <li><a href="../namespaces.html">Namespaces</a></li>
+                        <li><a href="../interfaces.html">Interfaces</a></li>
+            <li><a href="../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Internationalization</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../I18n.html">I18n</a>\I18n</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>I18n</strong>        extends <abbr title="Patterns\Abstracts\AbstractSingleton">AbstractSingleton</abbr>        implements
+        <abbr title="Patterns\Interfaces\TranslatableInterface">TranslatableInterface</abbr></p>
+
+            <div class="description">
+            <p>Internationalization class</p>
+            <p>For more informations, see:<br />
+ -   &lt;http://www.unicode.org/reports/tr35/&gt;<br />
+ -   &lt;http://userguide.icu-project.org/locale&gt;<br />
+ -   &lt;http://userguide.icu-project.org/formatparse/datetime&gt;<br />
+ -   &lt;http://www.php.net/manual/en/book.intl.php&gt;</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    static&nbsp;object
+                </td>
+                <td class="last">
+                    <a href="#method_getInstance">getInstance</a>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader = null, string $lang = null, string $timezone = null)
+                    <p>Construct or retreive an object instance</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setLoader">setLoader</a>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader)
+                    <p>Store the loader</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    object
+                </td>
+                <td class="last">
+                    <a href="#method_getLoader">getLoader</a>()
+                    <p>Gets the loader</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setLanguage">setLanguage</a>(string $lang, bool $throw_errors = true, bool $force_rebuild = false)
+                    <p>Loads a new language</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLanguage">getLanguage</a>()
+                    <p>Get the current language code used</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_setDefaultFromHttp">setDefaultFromHttp</a>()
+                    <p>Try to get the browser default locale and use it</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_isAvailableLanguage">isAvailableLanguage</a>(string $lang)
+                    <p>Check if a language code is available in the Loader</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    null|string
+                </td>
+                <td class="last">
+                    <a href="#method_getAvailableLocale">getAvailableLocale</a>(string $lang)
+                    <p>Get the full locale info for a language code</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getAvailableLanguages">getAvailableLanguages</a>()
+                    <p>Get the list of `Loader::available_languages`</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setLocale">setLocale</a>(string $locale)
+                    <p>Define a new locale for the system</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocale">getLocale</a>()
+                    <p>Get the current locale used by the system</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setTimezone">setTimezone</a>($timezone)
+                    <p>Define a new timezone for the system</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getTimezone">getTimezone</a>()
+                    <p>Get the current timezone used by the system</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_hasLocalizedString">hasLocalizedString</a>(string $index)
+                    <p>Check if a translation exists for an index</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocalizedString">getLocalizedString</a>(string $index)
+                    <p>Get the translation of an index</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_parseString">parseString</a>(string $str, array $arguments = null)
+                    <p>Parse a translated string making some parameters replacements</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getCurrency">getCurrency</a>(string $lang = null)
+                    <p>Get the currency of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getHttpHeaderLocale">getHttpHeaderLocale</a>()
+                    <p>Get the browser requested locale if so</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getAvailableLanguagesNames">getAvailableLanguagesNames</a>(string $lang = null)
+                    <p>Get the full list of `Loader::available_languages` option like human readable names</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLanguageCode">getLanguageCode</a>(string $lang = null)
+                    <p>Get the language code of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getRegionCode">getRegionCode</a>(string $lang = null)
+                    <p>Get the region code of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getScriptCode">getScriptCode</a>(string $lang = null)
+                    <p>Get the script code of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getKeywords">getKeywords</a>(string $lang = null)
+                    <p>Get the keywords of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    null|string
+                </td>
+                <td class="last">
+                    <a href="#method_getKeyword">getKeyword</a>(string $keyword, string $lang = null)
+                    <p>Get one keyword value of the current locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getPrimaryLanguage">getPrimaryLanguage</a>(string $for_locale = null, string $lang = null)
+                    <p>Get the primary language of a locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLanguageName">getLanguageName</a>(string $for_locale = null, string $lang = null)
+                    <p>Get the language name of a locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getCountryName">getCountryName</a>(string $for_locale = null, string $lang = null)
+                    <p>Get the country name of a locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocaleScript">getLocaleScript</a>(string $for_locale = null, string $lang = null)
+                    <p>Get the script name of a locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocaleVariant">getLocaleVariant</a>(string $for_locale = null, string $lang = null)
+                    <p>Get the variant name of a locale</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocalizedNumberString">getLocalizedNumberString</a>(<abbr title="I18n\numeric">numeric</abbr> $number, string $lang = null)
+                    <p>Get a localized number value</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocalizedPriceString">getLocalizedPriceString</a>(<abbr title="I18n\numeric">numeric</abbr> $number, string $lang = null)
+                    <p>Get a localized price value</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocalizedDateString">getLocalizedDateString</a>(<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $date, string $mask = null, string $charset = &#039;UTF-8&#039;, string $lang = null)
+                    <p>Get a localized date value</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<abbr title="I18n\str">str</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_translate">translate</a>(string $index, array $args = null, <abbr title="I18n\str">str</abbr> $lang = null)
+                    <p>Process a translation with arguments</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<abbr title="I18n\str">str</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_pluralize">pluralize</a>(array $indexes = array(), <abbr title="I18n\num">num</abbr> $number, array $args = null, <abbr title="I18n\str">str</abbr> $lang = null)
+                    <p>Process a translation with arguments depending on a counter</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getInstance">
+        <div class="location">at line 93</div>
+        <code>        static    public            object
+    <strong>getInstance</strong>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader = null, string $lang = null, string $timezone = null)</code>
+    </h3>
+    <div class="details">
+        <p>Construct or retreive an object instance</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a></td>
+                <td>$loader</td>
+                <td>A `I18n\Loader` instance object</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>A language code to use by default</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$timezone</td>
+                <td>A timezone code to use by default</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object</td>
+            <td>This will return a new singleton static instance of an I18n object</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setLoader">
+        <div class="location">at line 204</div>
+        <code>            public            <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+    <strong>setLoader</strong>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader)</code>
+    </h3>
+    <div class="details">
+        <p>Store the loader</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a></td>
+                <td>$loader</td>
+                <td>An instance of `I18n\Loader`</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a></td>
+            <td>Returns `$this` for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLoader">
+        <div class="location">at line 215</div>
+        <code>            public            object
+    <strong>getLoader</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the loader</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object</td>
+            <td>The instance of `I18n\Loader`</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setLanguage">
+        <div class="location">at line 231</div>
+        <code>            public            <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+    <strong>setLanguage</strong>(string $lang, bool $throw_errors = true, bool $force_rebuild = false)</code>
+    </h3>
+    <div class="details">
+        <p>Loads a new language</p>
+        <p>This will actually define a new default Locale and load the language strings database.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>A language code to use by default</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$throw_errors</td>
+                <td>Throw errors while re-creating the databases (default is `false`)</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$force_rebuild</td>
+                <td>Force the system to rebuild the databases using `I18n\Generator` (default is `false`)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a></td>
+            <td>Returns `$this` for method chaining</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Throws">Throws</abbr></td>
+                <td>a `I18nInvalidArgumentException` it the language is not available</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLanguage">
+        <div class="location">at line 251</div>
+        <code>            public            string
+    <strong>getLanguage</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the current language code used</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The current language code in use</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDefaultFromHttp">
+        <div class="location">at line 261</div>
+        <code>            public            void
+    <strong>setDefaultFromHttp</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Try to get the browser default locale and use it</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isAvailableLanguage">
+        <div class="location">at line 275</div>
+        <code>            public            bool
+    <strong>isAvailableLanguage</strong>(string $lang)</code>
+    </h3>
+    <div class="details">
+        <p>Check if a language code is available in the Loader</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>A language code to use by default</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>Returns `true` if the language code exists, `false` otherwise</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAvailableLocale">
+        <div class="location">at line 290</div>
+        <code>            public            null|string
+    <strong>getAvailableLocale</strong>(string $lang)</code>
+    </h3>
+    <div class="details">
+        <p>Get the full locale info for a language code</p>
+        <p>This will look in the `Loader::available_languages` option to retrieve the full<br />
+ locale string corresponding to a language code.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>A language code to use by default</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>null|string</td>
+            <td>The full locale string if found</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAvailableLanguages">
+        <div class="location">at line 306</div>
+        <code>            public            array
+    <strong>getAvailableLanguages</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the list of `Loader::available_languages`</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>The array defined in the Loader</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setLocale">
+        <div class="location">at line 317</div>
+        <code>            public            <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+    <strong>setLocale</strong>(string $locale)</code>
+    </h3>
+    <div class="details">
+        <p>Define a new locale for the system</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$locale</td>
+                <td>The full locale string to define</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a></td>
+            <td>Returns `$this` for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocale">
+        <div class="location">at line 328</div>
+        <code>            public            string
+    <strong>getLocale</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the current locale used by the system</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The full locale string currently in use</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setTimezone">
+        <div class="location">at line 339</div>
+        <code>            public            <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
+    <strong>setTimezone</strong>($timezone)</code>
+    </h3>
+    <div class="details">
+        <p>Define a new timezone for the system</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$timezone</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a></td>
+            <td>Returns `$this` for method chaining</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTimezone">
+        <div class="location">at line 351</div>
+        <code>            public            string
+    <strong>getTimezone</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the current timezone used by the system</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The full timezone string currently in use</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasLocalizedString">
+        <div class="location">at line 362</div>
+        <code>            public            bool
+    <strong>hasLocalizedString</strong>(string $index)</code>
+    </h3>
+    <div class="details">
+        <p>Check if a translation exists for an index</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$index</td>
+                <td>The original string or index to find translation of</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>Returns `true` if the translation exists, `false` otherwise</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocalizedString">
+        <div class="location">at line 373</div>
+        <code>            public            string
+    <strong>getLocalizedString</strong>(string $index)</code>
+    </h3>
+    <div class="details">
+        <p>Get the translation of an index</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$index</td>
+                <td>The original string or index to find translation of</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The translation found if so, `$index` otherwise</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_parseString">
+        <div class="location">at line 386</div>
+        <code>            public            string
+    <strong>parseString</strong>(string $str, array $arguments = null)</code>
+    </h3>
+    <div class="details">
+        <p>Parse a translated string making some parameters replacements</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$str</td>
+                <td>The original string to work on</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$arguments</td>
+                <td>A table of arguments to replace, like `var=&gt;val` pairs for the replacement of `%var%` by `val` in the final string (by default)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The string with replacements</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCurrency">
+        <div class="location">at line 426</div>
+        <code>            public            string
+    <strong>getCurrency</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the currency of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The currency code for the current locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getHttpHeaderLocale">
+        <div class="location">at line 445</div>
+        <code>            public            string
+    <strong>getHttpHeaderLocale</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the browser requested locale if so</p>
+        <p></p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The browser prefered locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAvailableLanguagesNames">
+        <div class="location">at line 457</div>
+        <code>            public            array
+    <strong>getAvailableLanguagesNames</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the full list of `Loader::available_languages` option like human readable names</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>The available languages table with the value as the human readable description of the corresponding locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLanguageCode">
+        <div class="location">at line 482</div>
+        <code>            public            string
+    <strong>getLanguageCode</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the language code of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The language code for the current locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRegionCode">
+        <div class="location">at line 494</div>
+        <code>            public            string
+    <strong>getRegionCode</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the region code of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The region code for the current locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScriptCode">
+        <div class="location">at line 505</div>
+        <code>            public            string
+    <strong>getScriptCode</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the script code of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The script code for the current locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getKeywords">
+        <div class="location">at line 516</div>
+        <code>            public            array
+    <strong>getKeywords</strong>(string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the keywords of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>The keywords for the current locale</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getKeyword">
+        <div class="location">at line 528</div>
+        <code>            public            null|string
+    <strong>getKeyword</strong>(string $keyword, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get one keyword value of the current locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$keyword</td>
+                <td>The keyword to search</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>null|string</td>
+            <td>The keyword value for the current locale if found</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPrimaryLanguage">
+        <div class="location">at line 541</div>
+        <code>            public            string
+    <strong>getPrimaryLanguage</strong>(string $for_locale = null, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the primary language of a locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$for_locale</td>
+                <td>The locale to work on, by default this will be the current locale</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The primary language for the locale in the requested language</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLanguageName">
+        <div class="location">at line 553</div>
+        <code>            public            string
+    <strong>getLanguageName</strong>(string $for_locale = null, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the language name of a locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$for_locale</td>
+                <td>The locale to work on, by default this will be the current locale</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The language name for the locale in the requested language</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCountryName">
+        <div class="location">at line 565</div>
+        <code>            public            string
+    <strong>getCountryName</strong>(string $for_locale = null, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the country name of a locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$for_locale</td>
+                <td>The locale to work on, by default this will be the current locale</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The country name for the locale in the requested language</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocaleScript">
+        <div class="location">at line 577</div>
+        <code>            public            string
+    <strong>getLocaleScript</strong>(string $for_locale = null, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the script name of a locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$for_locale</td>
+                <td>The locale to work on, by default this will be the current locale</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The script name for the locale in the requested language</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocaleVariant">
+        <div class="location">at line 589</div>
+        <code>            public            string
+    <strong>getLocaleVariant</strong>(string $for_locale = null, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the variant name of a locale</p>
+        <p></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$for_locale</td>
+                <td>The locale to work on, by default this will be the current locale</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The variant name for the locale in the requested language</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocalizedNumberString">
+        <div class="location">at line 633</div>
+        <code>        static    public            string
+    <strong>getLocalizedNumberString</strong>(<abbr title="I18n\numeric">numeric</abbr> $number, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get a localized number value</p>
+        <p>This is called by aliases `_N` and `numberify`.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="I18n\numeric">numeric</abbr></td>
+                <td>$number</td>
+                <td>The number value to parse</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The number value written in the locale</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>_N()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>numberify()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_getLocalizedPriceString">
+        <div class="location">at line 659</div>
+        <code>        static    public            string
+    <strong>getLocalizedPriceString</strong>(<abbr title="I18n\numeric">numeric</abbr> $number, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get a localized price value</p>
+        <p>This is called by aliases `_C` and `currencify`.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="I18n\numeric">numeric</abbr></td>
+                <td>$number</td>
+                <td>The price value to parse</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The price value written in the locale with a currency sign</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>_C()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>currencify()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_getLocalizedDateString">
+        <div class="location">at line 688</div>
+        <code>        static    public            string
+    <strong>getLocalizedDateString</strong>(<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $date, string $mask = null, string $charset = &#039;UTF-8&#039;, string $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get a localized date value</p>
+        <p>This is called by aliases `_D` and `datify`.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
+                <td>$date</td>
+                <td>The date value to parse as a `DateTime` object</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$mask</td>
+                <td>A mask to use for date writing (by default, the `datetime_mask_icu` translation string will be used, or no mask at all if it is not defined)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$charset</td>
+                <td>The charset to use (default is `utf-8`)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$lang</td>
+                <td>The language to use, by default this will be the current locale</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The date value written in the locale</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>_D()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>datify()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_translate">
+        <div class="location">at line 738</div>
+        <code>        static    public            <abbr title="I18n\str">str</abbr>
+    <strong>translate</strong>(string $index, array $args = null, <abbr title="I18n\str">str</abbr> $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Process a translation with arguments</p>
+        <p>This is the core method of the class: it searches the translation of `$index` in the<br />
+ current language, rebuilds it replacing the keys of `$args` by their values and returns<br />
+ the corresponding localized translated string.<br />
+<br />
+ This is called by aliases `_T` and `translate`.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$index</td>
+                <td>The index of the translation</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$args</td>
+                <td>The optional array of arguments for the final string replacements</td>
+            </tr>
+                    <tr>
+                <td><abbr title="I18n\str">str</abbr></td>
+                <td>$lang</td>
+                <td>The language code to load translation from</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="I18n\str">str</abbr></td>
+            <td>Returns the translated string if it exists in the current language, with variables replacements</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>_T()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>translate()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_pluralize">
+        <div class="location">at line 775</div>
+        <code>        static    public            <abbr title="I18n\str">str</abbr>
+    <strong>pluralize</strong>(array $indexes = array(), <abbr title="I18n\num">num</abbr> $number, array $args = null, <abbr title="I18n\str">str</abbr> $lang = null)</code>
+    </h3>
+    <div class="details">
+        <p>Process a translation with arguments depending on a counter</p>
+        <p>This will first choose in `$indexes` the corresponding value for the counter `$number`<br />
+ and then process the translation of the chosen string with arguments.<br />
+<br />
+ This is called by aliases `_P` and `pluralize`.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$indexes</td>
+                <td>An array of translation strings indexes to choose in considering the counter value</td>
+            </tr>
+                    <tr>
+                <td><abbr title="I18n\num">num</abbr></td>
+                <td>$number</td>
+                <td>The value of the counter to consider</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$args</td>
+                <td>The optional array of arguments for the final string replacements</td>
+            </tr>
+                    <tr>
+                <td><abbr title="I18n\str">str</abbr></td>
+                <td>$lang</td>
+                <td>The language code to load translation from</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="I18n\str">str</abbr></td>
+            <td>Returns the translated string fot the counter value if it exists, in the current language and with variables replacements</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>_P()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>pluralize()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
