@@ -94,6 +94,8 @@ function getPhpClassManualLink( $class_name, $ln='en' )
 
 	<h2 id="tests">Tests & documentation</h2>
     
+<h3>Include the <var>I18n</var> namespace</h3>
+
     <p>As the package classes names are built following the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PHP Framework Interoperability Group recommandations</a>, we use the <a href="https://gist.github.com/jwage/221634">SplClassLoader</a> to load package classes. The loader is included in the package but you can use your own.</p>
 
     <pre class="code" data-language="php">
@@ -140,6 +142,22 @@ var_export($translator);
 
     <p>Have a look is the source code of the Loader for a full review of possible options.</p>
 
+<h3>Include the <var>I18n</var> aliases</h3>
+
+    <p>The package embeds a set of "aliases" functions for quick writing. These functions are not required ...</p>
+
+    <p>To include it:</p>
+
+    <pre class="code" data-language="php">
+<?php
+echo 'require_once "path/to/I18n-package/src/I18n/aliases.php";';
+?>
+    </pre>
+
+    <p>As it is declared in the <var>composer.json</var> file, the file will be automatically loaded with the package.</p>
+    
+    <p>In the examples below, we write both the aliases usage and the procedural style.</p>
+
 <h3>Tests in english</h3>
 
 <p>As english is the default language, no need to declare it ...</p>
@@ -167,22 +185,6 @@ echo "\t".'or'."\n";
 echo 'echo $translator->translate("test_args", , array("arg1"=>"AZERTY", "arg2"=>4.657))'."\n";
 echo "\n";
 echo '=> '._T('test_args', array('arg1'=>'AZERTY', 'arg2'=>4.657));
-?>
-    </pre>
-
-<p>The <var>datify</var> function:</p>
-    <pre class="code" data-language="php">
-<?php
-echo '$date = new \DateTime;'."\n";
-echo 'echo _D($date)'."\n";
-echo "\t".'or'."\n";
-echo 'echo datify($date)'."\n";
-echo "\t".'or'."\n";
-echo 'echo $translator->getLocalizedDateString($date)'."\n";
-
-echo "\n";
-$date = new \DateTime;
-echo '=> '._D($date);
 ?>
     </pre>
 
@@ -215,6 +217,52 @@ for($counter=0; $counter<5; $counter++) {
 ?>
     </pre>
 
+<p>The <var>datify</var> or <var>getLocalizedDateString</var> function:</p>
+    <pre class="code" data-language="php">
+<?php
+echo '$date = new \DateTime;'."\n";
+echo 'echo _D($date)'."\n";
+echo "\t".'or'."\n";
+echo 'echo datify($date)'."\n";
+echo "\t".'or'."\n";
+echo 'echo $translator->getLocalizedDateString($date)'."\n";
+
+echo "\n";
+$date = new \DateTime;
+echo '=> '._D($date);
+?>
+    </pre>
+
+<p>The <var>numberify</var> or <var>getLocalizedNumberString</var> function:</p>
+    <pre class="code" data-language="php">
+<?php
+echo '$nb = 19876234234.0987567834;;'."\n";
+echo 'echo _N($nb)'."\n";
+echo "\t".'or'."\n";
+echo 'echo numberify($nb)'."\n";
+echo "\t".'or'."\n";
+echo 'echo $translator->getLocalizedNumberString($nb)'."\n";
+echo "\n";
+$nb = 19876234234.0987567834;
+echo '=> '._N($nb);
+?>
+    </pre>
+
+<p>The <var>currencify</var> or <var>getLocalizedPriceString</var> function:</p>
+    <pre class="code" data-language="php">
+<?php
+echo '$nb = 19876234234.0987567834;;'."\n";
+echo 'echo _C($nb)'."\n";
+echo "\t".'or'."\n";
+echo 'echo currencify($nb)'."\n";
+echo "\t".'or'."\n";
+echo 'echo $translator->getLocalizedPriceString($nb)'."\n";
+echo "\n";
+$nb = 19876234234.0987567834;
+echo '=> '._C($nb);
+?>
+    </pre>
+
 <p>Some other stuff:</p>
     <pre class="code" data-language="php">
 <?php
@@ -242,12 +290,6 @@ echo '=> '.$translator->getLocaleVariant()."\n";
 echo "\n";
 echo 'echo $translator->getLocaleVariant("fr")'."\n";
 echo '=> '.$translator->getLocaleVariant('fr')."\n";
-echo "\n";
-echo 'echo $translator->getLocalizedNumberString(1234234.0987567834)'."\n";
-echo '=> '.$translator->getLocalizedNumberString(1234234.0987567834)."\n";
-echo "\n";
-echo 'echo $translator->getLocalizedPriceString(1234234.0987567834)'."\n";
-echo '=> '.$translator->getLocalizedPriceString(1234234.0987567834)."\n";
 ?>
     </pre>
 
@@ -272,10 +314,6 @@ echo "\n";
 echo '=> '._T('test_args', array('arg1'=>'AZERTY', 'arg2'=>4.657), 'fr');
 
 echo "\n";
-echo "\n";
-echo '=> '._D($date, null, 'UTF-8', 'fr');
-
-echo "\n";
 $indexes = array(
     0=>'test_item_zero',
     1=>'test_item_one',
@@ -288,17 +326,36 @@ for($counter=0; $counter<5; $counter++) {
 
 echo "\n";
 echo "\n";
+echo '=> '._D($date, null, 'UTF-8', 'fr');
+
+echo "\n";
+echo "\n";
+echo '=> '._N($nb, 'fr');
+
+echo "\n";
+echo "\n";
+echo '=> '._C($nb, 'fr');
+
+echo "\n";
+echo "\n";
+echo 'echo $translator->getCurrency("fr")'."\n";
 echo '=> '.$translator->getCurrency('fr')."\n";
+echo 'echo $translator->getLanguageCode("fr")'."\n";
 echo '=> '.$translator->getLanguageCode('fr')."\n";
+echo 'echo $translator->getLanguageName("fr","fr")'."\n";
 echo '=> '.$translator->getLanguageName('fr','fr')."\n";
+echo 'echo $translator->getLanguageName("en","fr")'."\n";
 echo '=> '.$translator->getLanguageName('en','fr')."\n";
+echo 'echo $translator->getCountryName("fr","fr")'."\n";
 echo '=> '.$translator->getCountryName('fr','fr')."\n";
+echo 'echo $translator->getCountryName("en","fr")'."\n";
 echo '=> '.$translator->getCountryName('en','fr')."\n";
+echo 'echo $translator->getLocaleScript("en", "fr")'."\n";
 echo '=> '.$translator->getLocaleScript('en', 'fr')."\n";
+echo 'echo $translator->getLocaleVariant("fr")'."\n";
 echo '=> '.$translator->getLocaleVariant('fr')."\n";
+echo 'echo $translator->getLocaleVariant("en","fr")'."\n";
 echo '=> '.$translator->getLocaleVariant('en','fr')."\n";
-echo '=> '.$translator->getLocalizedNumberString(1234234.0987567834, 'fr')."\n";
-echo '=> '.$translator->getLocalizedPriceString(1234234.0987567834, 'fr')."\n";
 ?>
     </pre>
 
@@ -320,6 +377,21 @@ echo 'array ('."\n"
     ."\t".'"gb" => "en_GB_UKP",'."\n"
     ."\t".'"fr" => "fr_FR_EUR",'."\n"
 .')';
+?>
+    </pre>
+
+<p>You can retrieve the full table of available languages and corresponding locales with:</p>
+
+    <pre class="code" data-language="php">
+<?php
+echo 'echo $translator->getAvailableLanguages()'."\n";
+echo '=> '.var_export($translator->getAvailableLanguages(),1)."\n";
+echo "\n";
+echo 'echo $translator->getAvailableLanguagesNames()'."\n";
+echo '=> '.var_export($translator->getAvailableLanguagesNames(),1)."\n";
+echo "\n";
+echo 'echo $translator->getAvailableLanguagesNames("fr")'."\n";
+echo '=> '.var_export($translator->getAvailableLanguagesNames('fr'),1)."\n";
 ?>
     </pre>
 

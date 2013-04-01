@@ -76,6 +76,38 @@ if (!function_exists('datify'))
 	}	
 }
 
+if (!function_exists('_N')) 
+{
+	function _N($number, $lang = null)
+	{
+		return \I18n\I18n::getLocalizedNumberString($number, $lang);
+	}	
+}
+
+if (!function_exists('numberify')) 
+{
+	function numberify($number, $lang = null)
+	{
+		return \I18n\I18n::getLocalizedNumberString($number, $lang);
+	}	
+}
+
+if (!function_exists('_C')) 
+{
+	function _C($number, $lang = null)
+	{
+		return \I18n\I18n::getLocalizedPriceString($number, $lang);
+	}	
+}
+
+if (!function_exists('currencify')) 
+{
+	function currencify($number, $lang = null)
+	{
+		return \I18n\I18n::getLocalizedPriceString($number, $lang);
+	}	
+}
+
 if (!function_exists('getlocale')) 
 {
 	function getlocale()

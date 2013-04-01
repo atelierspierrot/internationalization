@@ -34,6 +34,9 @@ use Patterns\Abstracts\AbstractOptionable;
 class Loader extends AbstractOptionable
 {
 
+    /**
+     * The default options
+     */
     public static $defaults = array(
         'available_languages'   => array(
             'en' => 'en_US_USD',
@@ -47,6 +50,7 @@ class Loader extends AbstractOptionable
         'language_varname'      => 'i18n_%s',
         'language_directory'    => null,
         'language_filename'     => 'i18n.%s.php',
+        // for CSV database rebuild
         'language_strings_db_directory'  => null,
         'language_strings_db_filename'  => 'i18n.csv',
         'force_rebuild'         => false,
@@ -55,11 +59,24 @@ class Loader extends AbstractOptionable
         'show_untranslated_wrapper' => '<span style="color:red"><strong>%s</strong> (%s)</span>',
     );
 
+    /**
+     * Creation of a Loader with an optional user defined set of options
+     *
+     * @param array $user_options An array of options values to over-write defaults
+     */
     public function __construct(array $user_options = array())
     {
         $this->setOptions( array_merge(self::$defaults, $user_options) );
     }
 
+    /**
+     * Parse an option value replacing `%s` by the actual language code
+     *
+     * @param string $name The option name
+     * @param string $lang The language code to use
+     * @param misc $default The value to return if the option can't be found
+     * @return misc The value of the option if found, with replacement if so
+     */
     public function getParsedOption($name, $lang = null, $default = null)
     {
         $val = $this->getOption($name, $default);
@@ -73,16 +90,34 @@ class Loader extends AbstractOptionable
         return $val;
     }
 
+    /**
+     * Build the file name for the language database 
+     *
+     * @param string $lang The language code to use
+     * @return string The file name for the concerned language
+     */
     public function buildLanguageFileName($lang)
     {
         return $this->getParsedOption('language_filename', $lang);
     }
 
+    /**
+     * Build the file path for the language database 
+     *
+     * @param string $lang The language code to use
+     * @return string The file path for the concerned language
+     */
     public function buildLanguageFilePath($lang, $path = null)
     {
         return rtrim($this->getParsedOption('language_directory', $lang), '/').'/'.$this->buildLanguageFileName($lang);
     }
 
+    /**
+     * Build the variable name for the language database 
+     *
+     * @param string $lang The language code to use
+     * @return string The variable name for the concerned language
+     */
     public function buildLanguageVarname($lang)
     {
         return $this->getParsedOption('language_varname', $lang);
