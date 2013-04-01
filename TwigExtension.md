@@ -4,6 +4,9 @@ Internationalization : the TWIG extension
 The "internationalization" package comes with a [Twig template engine](http://twig.sensiolabs.org/)
 extension which allows you to use the class to translate and pluralize your texts.
 
+Please note that this extension **IS NOT the [internal Twig "I18n" extension](http://twig.sensiolabs.org/doc/extensions/i18n.html)**.
+As the internal one is made by the Twig creators, it is preferable to use it in priority.
+
 
 ## Usage
 
@@ -22,12 +25,12 @@ To inform Twig that you want to use the extension, just write:
     $twig = new Twig_Environment($loader);
 
     // addition of the extension to the environement
-    $twig->addExtension(new \I18n\Twig\Extension($translator)); 
+    $twig->addExtension(new \I18n\Twig\I18nExtension($translator)); 
 
 As you can see, you need to pass a translator instance to the extension constructor ; this
 is just to force you to first define your internationalization environement.
 
-### Some filters, some functions, one global and two tags
+### Extension filters
 
 Once the extension is available in Twig, you can use the new `translate` and `datify` filters:
 
@@ -39,6 +42,8 @@ Once the extension is available in Twig, you can use the new `translate` and `da
     {{ 'test'|translate({}, 'fr') }}
 
     {{ date|datify }}
+
+### Extension functions
 
 You can also use the `translate`, `pluralize` and `datify` functions:
 
@@ -52,8 +57,13 @@ You can also use the `translate`, `pluralize` and `datify` functions:
 
     {{ datify(date) }}
 
+### Extension tags
+
 Finally, for a better manipulation, the `translate` and `pluralize` functionalities are also
-defined as tags:
+defined as tags that can receive a set of parameters in any order.
+
+The `translate` tag can be used as a block, with the string you want to translate as body,
+or as a linear tag:
 
     {% translate %}
         string to translate
@@ -78,7 +88,10 @@ defined as tags:
     {% endtranslate %}
     --
     {% translate 'ln' {arguments} "string to translate" %} 
-    --
+
+As it is more complex, the `pluralize` tag can only be used as a block, with the set of 
+strings to choose as body, separated by a pipe:
+
     {% pluralize number %}
         test_item_zero|test_item_one | test_item_two| test_item_multi
     {% endpluralize %}
@@ -95,7 +108,12 @@ defined as tags:
     test_item_zero|test_item_one | test_item_two| test_item_multi
     {% endpluralize %} 
 
-The extension defines the `I18n` instance globally in the `i18n` Twig global:
+For both tags used as block with a body, the leading and trailing spaces of the body will
+be deleted so you can write your strings with spaces ...
+
+### Extension global
+
+The extension defines the `I18n` instance globally in the `i18n` Twig variable:
 
     {{ i18n.locale }}
 

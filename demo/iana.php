@@ -50,12 +50,9 @@ function getPhpClassManualLink( $class_name, $ln='en' )
 
     <header id="top" role="banner">
         <hgroup>
-            <h1>Working round the IANA database</h1>
-            <h2 class="slogan">A PHP package to manage i18n: translations, pluralizations and date formats according to a localization.</h2>
+            <h1>Working around the IANA database</h1>
+            <h2 class="slogan">This is a work-in-progress !!</h2>
         </hgroup>
-        <div class="hat">
-            <p>These pages show and demonstrate the use and functionality of the <a href="https://github.com/atelierspierrot/internationalization">atelierspierrot/internationalization</a> PHP package you just downloaded.</p>
-        </div>
     </header>
 
 	<nav>
@@ -98,28 +95,53 @@ echo "\n";
 echo 'Dump of the translator object:'."\n";
 var_export($translator);
 */
+$iana = new \I18n\Iana(null, __DIR__);
+$db = $iana->getDb();
 ?>
+
+<p>The IANA language subtags database is available at <a href="<?php echo \I18n\Iana::IANA_LANGUAGE_SUBTAG_REGISTRY; ?>"><?php echo \I18n\Iana::IANA_LANGUAGE_SUBTAG_REGISTRY; ?></a>.
+The <var>I18n\Iana</var> class manages this database (copying it locally) and allow to get the full lists it defines.
+</p>
+
+<p>Available keys of the DB are:</p>
 
     <pre class="code" data-language="php">
 <?php
+var_export(array_keys($db));
+?>
+    </pre>
 
-$iana = new \I18n\Iana(null, __DIR__);
-$db = $iana->getDb();
+<h3>Languages list</h3>
 
-//var_export($iana->getLanguages());
-//var_export($iana->getRegions());
-//var_export($iana->getScripts());
+    <pre class="code" data-language="php">
+<?php
+var_export($iana->getLanguages());
+?>
+    </pre>
+
+<h3>Regions list</h3>
+
+    <pre class="code" data-language="php">
+<?php
+var_export($iana->getRegions());
+?>
+    </pre>
+
+<h3>Scripts list</h3>
+
+    <pre class="code" data-language="php">
+<?php
+var_export($iana->getScripts());
+?>
+    </pre>
+
+<h3>Extlang list</h3>
+
+    <pre class="code" data-language="php">
+<?php
 var_export($iana->getExtlangs());
 
-var_export(array_keys($db));
 //var_export($db);
-
-echo '=> '.$translator->getCurrency()."\n";
-echo '=> '.$translator->getCurrency('fr')."\n";
-echo '=> '.$translator->getLocalizedNumberString(1234234.0987567834)."\n";
-echo '=> '.$translator->getLocalizedNumberString(1234234.0987567834, 'fr')."\n";
-echo '=> '.$translator->getLocalizedPriceString(1234234.0987567834)."\n";
-echo '=> '.$translator->getLocalizedPriceString(123423.0987567834, 'fr')."\n";
 ?>
     </pre>
 

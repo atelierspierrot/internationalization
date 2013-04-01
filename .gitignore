@@ -5,6 +5,7 @@
 ._*
 .DS_Store
 *~
+*~lock*
 Thumbs.db
 ehthumbs.db
 Icon

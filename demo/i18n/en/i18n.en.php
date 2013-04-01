@@ -12,5 +12,7 @@ $i18n_en=array (
   'test_item_one_args' => 'Just one item - I received arguments : « %arg1% » and « %arg2% »',
   'test_item_two_args' => 'Two items - I received arguments : « %arg1% » and « %arg2% »',
   'test_item_multi_args' => 'There are %nb% items - I received arguments : « %arg1% » and « %arg2% »',
+  'Test of non-indexed string' => 'Test of non-indexed string',
+  'html_test' => 'A test with <abbr title="Hyper Text Markup Language">HTML</abbr> <b>tags</b> …',
 );
 ?>

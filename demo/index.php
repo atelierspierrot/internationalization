@@ -51,7 +51,7 @@ function getPhpClassManualLink( $class_name, $ln='en' )
     <header id="top" role="banner">
         <hgroup>
             <h1>Tests of PHP <em>Internationalization</em> package</h1>
-            <h2 class="slogan">A PHP package to manage i18n: translations, pluralizations and date formats according to a localization.</h2>
+            <h2 class="slogan">A PHP package to manage i18n: translations, pluralizations and date and number formats according to a localization.</h2>
         </hgroup>
         <div class="hat">
             <p>These pages show and demonstrate the use and functionality of the <a href="https://github.com/atelierspierrot/internationalization">atelierspierrot/internationalization</a> PHP package you just downloaded.</p>
@@ -64,6 +64,8 @@ function getPhpClassManualLink( $class_name, $ln='en' )
             <li><a href="index.php">Homepage</a><ul>
                 <li><a href="index.php#notes">First notes</a></li>
                 <li><a href="index.php#tests">Tests & Doc</a></li>
+                <li><a href="index.php#options">Loader options</a></li>
+                <li><a href="index.php#debug">I18n debug</a></li>
             </ul></li>
             <li><a href="twig.php">Twig extension</a><ul>
                 <li><a href="twig.php#twiginclude">Include the extension</a></li>
@@ -86,7 +88,7 @@ function getPhpClassManualLink( $class_name, $ln='en' )
         <article>
 
     <h2 id="notes">First notes</h2>
-    <p>All these classes works in a PHP version 5.3 minus environment. They are included in the <em>Namespace</em> <strong>I18n</strong>.</p>
+    <p>All these classes works in a PHP version 5.3 minus environment, with the <a href="http://www.php.net/manual/en/book.intl.php">ICU library</a> enabled. They are included in the <em>Namespace</em> <strong>I18n</strong>.</p>
     <p>For clarity, the examples below are NOT written as a working PHP code when it seems not necessary. For example, rather than write <var>echo "my_string";</var> we would write <var>echo my_string</var> or rather than <var>var_export($data);</var> we would write <var>echo $data</var>. The main code for these classes'usage is written strictly.</p>
     <p>As a reminder, and because it's always useful, have a look at the <a href="http://pear.php.net/manual/<?php echo $arg_ln; ?>/standards.php">PHP common coding standards</a>.</p>
 
@@ -96,11 +98,17 @@ function getPhpClassManualLink( $class_name, $ln='en' )
 
     <pre class="code" data-language="php">
 <?php
-echo 'require_once "vendor/autoload.php";';
-echo "\n\n\tor\n\n";
 echo 'require_once ".../src/SplClassLoader.php"; // if required, a copy is proposed in the package'."\n";
 echo '$classLoader = new SplClassLoader("I18n", "/path/to/package/src");'."\n";
 echo '$classLoader->register();';
+?>
+    </pre>
+
+    <p>If you use the package in your <a href="http://getcomposer.org/">composer.json</a>, the namespace is automatically added to the autoloader.</p>
+
+    <pre class="code" data-language="php">
+<?php
+echo 'require_once "vendor/autoload.php";';
 ?>
     </pre>
 
@@ -129,6 +137,8 @@ var_export($translator);
 */
 ?>
     </pre>
+
+    <p>Have a look is the source code of the Loader for a full review of possible options.</p>
 
 <h3>Tests in english</h3>
 
@@ -292,7 +302,28 @@ echo '=> '.$translator->getLocalizedPriceString(1234234.0987567834, 'fr')."\n";
 ?>
     </pre>
 
-    <h2>Loader options</h2>
+    <h2 id="options">Loader options</h2>
+
+    <h3>Available languages</h3>
+
+<p>The <var>available_languages</var> array defines a key=>value pairs table of the locales and languages you want to use. 
+For each case, the key is the shortcut used to identify the language (<em><var>en</var> for US english for example</em>) and the
+value is a full locale code, constructed as <var>[language code]_[country code]_[variant]</var>, as defined in the <a href="http://userguide.icu-project.org/locale">ICU Locale naming conventions</a>.
+You can define your locale codes with more complex informations such as keywords or scripts, but the three informations <var>language code</var>, <var>country code</var> and <var>variant</var> are required
+to use all the <var>I18n</var> methods. In our case, the <var>variant</var> is the currency.
+</p>
+
+    <pre class="code" data-language="php">
+<?php
+echo 'array ('."\n"
+    ."\t".'"en" => "en_US_USD",'."\n"
+    ."\t".'"gb" => "en_GB_UKP",'."\n"
+    ."\t".'"fr" => "fr_FR_EUR",'."\n"
+.')';
+?>
+    </pre>
+
+    <h3>Show untranslated</h3>
 
 <p>Set the <var>show_untranslated</var> option to <var>true</var> to see the strings called for translation by that doesn't seem to exist (<em>for debug</em>).</p>
 
@@ -320,6 +351,8 @@ echo '=> '._T('noexist', array(
 ?>
 </p>
 
+    <h3>Accept from HTTP</h3>
+
 <p>To let the class get and use the browser locale if so:</p>
 
     <pre class="code" data-language="php">
@@ -328,13 +361,26 @@ echo '$translator->setDefaultFromHttp();'."\n";
 ?>
     </pre>
 
-    <p>Finally, a full dump of the <var>translator</var> object:</p>
+    <h2 id="debug">I18n debug</h2>
+
+    <p>Finally, a full dump of the <var>translator</var> object used in this page:</p>
     
     <pre class="code" data-language="php">
 <?php
 var_export($translator);
 ?>
     </pre>
+
+<?php
+/*
+echo "\n\n";
+echo _T('Test of non-indexed string')."\n";
+echo _T('Test of non-indexed string',null,'fr')."\n";
+echo "\n\n";
+echo _T('html_test')."\n";
+echo _T('html_test',null,'fr')."\n";
+*/
+?>
 
         </article>
     </div>

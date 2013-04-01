@@ -59,7 +59,7 @@ $translator = \I18n\I18n::getInstance($i18n_loader);
     <header id="top" role="banner">
         <hgroup>
             <h1>TWIG extension included in the PHP <em>Internationalization</em> package</h1>
-            <h2 class="slogan">A PHP package to manage i18n: translations, pluralizations and date formats according to a localization.</h2>
+            <h2 class="slogan">A PHP package to manage i18n: translations, pluralizations and date and number formats according to a localization.</h2>
         </hgroup>
         <div class="hat">
             <p>These pages show and demonstrate the use and functionality of the <a href="https://github.com/atelierspierrot/internationalization">atelierspierrot/internationalization</a> PHP package you just downloaded.</p>
@@ -72,6 +72,8 @@ $translator = \I18n\I18n::getInstance($i18n_loader);
             <li><a href="index.php">Homepage</a><ul>
                 <li><a href="index.php#notes">First notes</a></li>
                 <li><a href="index.php#tests">Tests & Doc</a></li>
+                <li><a href="index.php#options">Loader options</a></li>
+                <li><a href="index.php#debug">I18n debug</a></li>
             </ul></li>
             <li><a href="twig.php">Twig extension</a><ul>
                 <li><a href="twig.php#twiginclude">Include the extension</a></li>
@@ -95,7 +97,7 @@ $translator = \I18n\I18n::getInstance($i18n_loader);
 
 	<h2 id="twig">Twig extension</h2>
 
-<p>The package includes a Twig extension to use the <var>translate</var>, <var>pluralize</var> and <var>datify</var> functions described above in the template engine.</p>
+<p>The package includes a Twig extension to use the <var>translate</var>, <var>pluralize</var> and <var>datify</var> functionsin the template engine.</p>
 
 	<h3 id="twiginclude">Include the extension</h3>
 
@@ -177,6 +179,9 @@ echo '=> '.$twig->render("Hello {{ name }}! {% set args={'arg1':'AZERTY', 'arg2'
 echo "\n";
 echo 'echo $twig->render("Hello {{ name }}! {{ "test_args"|translate({}, "fr") }}", array(name => PieroWbmstr));'."\n";
 echo '=> '.$twig->render("Hello {{ name }}! {{ 'test'|translate({}, 'fr') }}", array('name' => 'PieroWbmstr'))."\n";
+echo "\n";
+echo 'echo $twig->render("Hello {{ name }}! {{ "html_test"|translate|raw }}", array(name => PieroWbmstr));'."\n";
+echo '=> '.$twig->render("Hello {{ name }}! {{ 'html_test'|translate|raw }}", array('name' => 'PieroWbmstr'))."\n";
 
 $date = new \DateTime();
 echo "\n";

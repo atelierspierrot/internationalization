@@ -12,5 +12,7 @@ $i18n_fr=array (
   'test_item_one_args' => 'Un seul item - J\'ai eu les arguments : « %arg1% » et « %arg2% »',
   'test_item_two_args' => 'Deux items - J\'ai eu les arguments : « %arg1% » et « %arg2% »',
   'test_item_multi_args' => 'Il y a %nb% items - J\'ai eu les arguments : « %arg1% » et « %arg2% »',
+  'Test of non-indexed string' => 'Un test de chaîne traduite non-indéxée',
+  'html_test' => 'Un test avec des <b>tags</b> <abbr title="Hyper Text Markup Language">HTML</abbr> …',
 );
 ?>

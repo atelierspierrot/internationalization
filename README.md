@@ -1,7 +1,7 @@
 Internationalization
 ====================
 
-A PHP package to manage i18n: translations, pluralizations and date formats according to 
+A PHP package to manage i18n: translations, pluralizations and date and number formats according to 
 a localization.
 
 
@@ -45,26 +45,38 @@ in your `composer.json`:
         "atelierspierrot/internationalization": "dev-master"
     }
 
+The namespace will be automatically added to the project Composer autoloader.
+
+
 ## Usage
 
 ### Object creation and PHP usage
 
-To create a new I18n instance, you need to pass a `I18n\Loader` as first argument:
+To create a new I18n instance, you need to pass it a `I18n\Loader` object:
 
     // Creation of the I18n Loader
     $i18n_loader = new \I18n\Loader(array(
+
         // this is the directory where your language strings are defined
         'language_directory' => __DIR__.'/i18n',
+
         // this is the list of available languages
-        'available_languages'   => array( 'en', 'fr' ),
-        'default_language'      => 'en',
+        'available_languages' => array(
+            'en' => 'en_US_USD',
+            'gb' => 'en_GB_UKP',
+            'fr' => 'fr_FR_EUR'
+        ),
+        'default_language' => 'en',
+
         // this is the tag construction used for replacements in strings
         // by default, "%arg%" will be replacement by the argument "arg" value
-        'arg_wrapper_mask'      => "%%%s%%",
+        'arg_wrapper_mask' => "%%%s%%",
     ));
 
     // Creation of the I18n instance (statically) passing it the Loader
     $translator = \I18n\I18n::getInstance($i18n_loader);
+
+For a full list of possible Loader options, please have a look in source code.
 
 Any option value defining a directory path or a filename construction can contains a `%s`
 tag that will be replaced by the current language.
@@ -74,8 +86,8 @@ tag that will be replaced by the current language.
     will render, for the EN language:
         'language_directory' => __DIR__.'/i18n/EN'
 
-As the I18n is a Singleton object, any future call of `\I18n\I18n::getInstance` will refer
-to the just created object.
+As you can see, the I18n class is defines a Singleton object: any future call of 
+`\I18n\I18n::getInstance()` will refer to the first created object instance.
 
 Then, to actually use the translated value of a string, use the `translate` method:
 
@@ -130,7 +142,7 @@ by Composer:
 
 ## Extensions
 
-The package embedded an extension to use the class in [the Twig template engine](http://twig.sensiolabs.org/).
+The package embeds an extension to use the class in [the Twig template engine](http://twig.sensiolabs.org/).
 See the [Twig Extension page](TwigExtension.md) for more infos.
 
 

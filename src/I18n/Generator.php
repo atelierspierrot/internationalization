@@ -32,11 +32,14 @@ namespace I18n;
 class Generator
 {
 
+    protected $generator;
+
     protected $db_filepath;
 
-    public function __construct($db_filepath = null)
+    public function __construct($db_filepath = null, $generator = 'csv')
     {
         if (!empty($db_filepath)) $this->setDbFilepath($db_filepath);
+        if (!empty($generator)) $this->setGenerator($generator);
     }
 
     public function setDbFilepath($path)
@@ -50,40 +53,37 @@ class Generator
         return $this->db_filepath;
     }
 
+    public function setGenerator($name)
+    {
+        $cls_name = '\I18n\Generator\\'.ucfirst($name);
+        if (class_exists($cls_name)) {
+            $generator = new $cls_name;
+            if ($generator instanceof GeneratorInterface) {
+                $this->generator = $generator;
+            } else {
+                throw new I18nInvalidArgumentException(
+                    sprintf('Internationalization database generator "%s" must implement interface "I18n\GeneratorInterface"!', $name)
+                );
+            }
+        } else {
+            throw new I18nInvalidArgumentException(
+                sprintf('Unknown internationalization database generator named "%s"!', $name)
+            );
+        }
+        return $this;
+    }
+
+    public function getGenerator()
+    {
+        return $this->generator;
+    }
+
     public function generate()
     {
         $_f = $this->getDbFilepath();
         $i18n = I18n::getInstance();
         if (@file_exists($_f)) {
-            $all_lang_strings = $headers = array();
-            if (false!==($handle=fopen($_f, 'r'))) {
-                $line_count = 0;
-                while (false!==($data = fgetcsv($handle, 0, ';', '"'))) {
-                    if ($line_count===0) {
-                        for ($c=0; $c<count($data); $c++) {
-                            $headers[$c] = $data[$c];
-                            if ($c!==0) {
-                                $all_lang_strings[$data[$c]] = array();
-                            }
-                        }
-                    } else {
-                        $index = $data[0];
-                        for ($d=1; $d<count($data); $d++) {
-                            $lang = $headers[$d];
-                            if (!isset($all_lang_strings[$lang][$index])) {
-                                $all_lang_strings[$lang][$index] = $data[$d];
-                            } else {
-                                trigger_error(
-                                    sprintf('Language string with index "%s" defined more than one time!', $index)
-                                    , E_USER_NOTICE);
-                            }
-                        }
-                    }
-                    $line_count++;
-                }  
-                fclose($handle);  
-            }
-            
+            $all_lang_strings = $this->getGenerator()->generate($_f, $i18n);
             foreach($all_lang_strings as $lang=>$strings) {
                 $_lf = $i18n->getLoader()->buildLanguageFilePath($lang);
                 $dir = dirname($_lf);
