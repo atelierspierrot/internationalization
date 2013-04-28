@@ -29,5 +29,8 @@
     "autoload": { 
         "psr-0": {  "I18n": "src" },
         "files": [ "src/I18n/aliases.php" ]
-    }
+    },
+    "extra": {
+        "views_functions": "src/I18n/aliases.php"
+    },
 }
