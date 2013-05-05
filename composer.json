@@ -31,6 +31,6 @@
         "files": [ "src/I18n/aliases.php" ]
     },
     "extra": {
-        "views_functions": "src/I18n/aliases.php"
+        "views-functions": "src/I18n/aliases.php"
     }
 }
