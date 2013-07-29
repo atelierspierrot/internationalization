@@ -45,7 +45,7 @@ use I18n\Loader;
  * -   <http://userguide.icu-project.org/formatparse/datetime>
  * -   <http://www.php.net/manual/en/book.intl.php>
  *
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author      Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class I18n extends AbstractSingleton implements TranslatableInterface
 {
@@ -261,7 +261,7 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     public function setDefaultFromHttp()
     {
         $http_locale = $this->getHttpHeaderLocale();
-        if ($this->isAvailableLanguage($http_locale)) {
+        if (!empty($http_locale) && $this->isAvailableLanguage($http_locale)) {
             $this->setLanguage($http_locale);
         }
     }
