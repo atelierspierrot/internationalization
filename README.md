@@ -1,7 +1,7 @@
 Internationalization
 ====================
 
-A PHP package to manage i18n: translations, pluralizations and date and number formats according to 
+A PHP package to manage i18n: translations, pluralizations, date and number formating according to 
 a localization.
 
 
@@ -70,6 +70,7 @@ To create a new I18n instance, you need to pass it a `I18n\Loader` object:
 
         // this is the tag construction used for replacements in strings
         // by default, "%arg%" will be replacement by the argument "arg" value
+        // as this will be passed thru a 'sprintf' PHP function, literal percent is written '%%'
         'arg_wrapper_mask' => "%%%s%%",
     ));
 
@@ -86,7 +87,7 @@ tag that will be replaced by the current language.
     will render, for the EN language:
         'language_directory' => __DIR__.'/i18n/EN'
 
-As you can see, the I18n class is defines a Singleton object: any future call of 
+As you can see, the I18n class is defined as a Singleton object: any future call of 
 `\I18n\I18n::getInstance()` will refer to the first created object instance.
 
 Then, to actually use the translated value of a string, use the `translate` method:
@@ -105,7 +106,7 @@ You can use the `pluralize` method to choose a translated string depending on a 
 
 ### Translation strings definition
 
-By default (*this can be over-write in the Loader*), the I18n object will load the strings
+By default (this can be over-write in the Loader), the I18n object will load the strings
 defined as a PHP array like:
 
     $i18n_en = array (
