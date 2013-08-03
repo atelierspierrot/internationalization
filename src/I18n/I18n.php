@@ -123,7 +123,7 @@ class I18n extends AbstractSingleton implements TranslatableInterface
         }
         $this->setLanguage($lang, false, $this->loader->getOption('force_rebuild'));
         if (is_null($timezone)) {
-            $timezone = date_default_timezone_get();
+            $timezone = @date_default_timezone_get();
             if (empty($timezone)) {
                 throw new I18nException(
                     'No default timezone defined in your system, please define the third argument of method "I18n::getInstance()"!'
@@ -607,7 +607,7 @@ class I18n extends AbstractSingleton implements TranslatableInterface
             $this->setLanguage( $lang );
         }
         $locale = !is_null($for_locale) ? $this->getAvailableLocale($for_locale) : $this->getLocale();
-        $arguments = $fo_array ? array($locale, $this->getLocale()) : array($locale);
+        $arguments = $do_array ? array($locale, $this->getLocale()) : array($locale);
         $str = call_user_func_array(array('Locale', $fct_name), $arguments);
         if (!empty($original_lang)) {
             $this->setLanguage( $original_lang );
