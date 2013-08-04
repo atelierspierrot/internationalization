@@ -79,23 +79,6 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     private $language_strings_cache = array();
 
 // --------------------
-// Singleton Interface
-// --------------------
-
-    /**
-     * Construct or retreive an object instance
-     *
-     * @param oject $loader A `I18n\Loader` instance object
-     * @param string $lang A language code to use by default
-     * @param string $timezone A timezone code to use by default
-     * @return object This will return a new singleton static instance of an I18n object
-     */
-    public static function getInstance(Loader $loader = null, $lang = null, $timezone = null)
-    {
-        return parent::getInstance($loader, $lang, $timezone);
-    }
-
-// --------------------
 // Construct / Destruct / Clone
 // --------------------
 
