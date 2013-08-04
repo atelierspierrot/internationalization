@@ -45,7 +45,7 @@ use I18n\Loader;
  * -   <http://userguide.icu-project.org/formatparse/datetime>
  * -   <http://www.php.net/manual/en/book.intl.php>
  *
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author      Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class I18n extends AbstractSingleton implements TranslatableInterface
 {
@@ -77,23 +77,6 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      * to avoid parsing the same db file more than once
      */
     private $language_strings_cache = array();
-
-// --------------------
-// Singleton Interface
-// --------------------
-
-    /**
-     * Construct or retreive an object instance
-     *
-     * @param oject $loader A `I18n\Loader` instance object
-     * @param string $lang A language code to use by default
-     * @param string $timezone A timezone code to use by default
-     * @return object This will return a new singleton static instance of an I18n object
-     */
-    public static function getInstance(Loader $loader = null, $lang = null, $timezone = null)
-    {
-        return parent::getInstance($loader, $lang, $timezone);
-    }
 
 // --------------------
 // Construct / Destruct / Clone
@@ -261,7 +244,7 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     public function setDefaultFromHttp()
     {
         $http_locale = $this->getHttpHeaderLocale();
-        if ($this->isAvailableLanguage($http_locale)) {
+        if (!empty($http_locale) && $this->isAvailableLanguage($http_locale)) {
             $this->setLanguage($http_locale);
         }
     }
