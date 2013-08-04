@@ -33,6 +33,11 @@ function _getSecuredRealPath($path, $depth_from_root = 1)
     return str_replace(join($ds, $parts), $ds.'[***]', $path);
 }
 
+/**
+ * GET arguments settings
+ */
+$arg_ln = isset($_GET['ln']) ? $_GET['ln'] : 'en';
+
 function getPhpClassManualLink( $class_name, $ln='en' )
 {
     return sprintf('http://php.net/manual/%s/class.%s.php', $ln, strtolower($class_name));
@@ -102,6 +107,7 @@ function getPhpClassManualLink( $class_name, $ln='en' )
     <p>All these classes works in a PHP version 5.3 minus environment, with the <a href="http://www.php.net/manual/en/book.intl.php">ICU library</a> enabled. They are included in the <em>Namespace</em> <strong>I18n</strong>.</p>
     <p>For clarity, the examples below are NOT written as a working PHP code when it seems not necessary. For example, rather than write <var>echo "my_string";</var> we would write <var>echo my_string</var> or rather than <var>var_export($data);</var> we would write <var>echo $data</var>. The main code for these classes'usage is written strictly.</p>
     <p>As a reminder, and because it's always useful, have a look at the <a href="http://pear.php.net/manual/<?php echo $arg_ln; ?>/standards.php">PHP common coding standards</a>.</p>
+    <p>You should exclude <var>E_STRICT</var> error messages from PHP's error reporting.</p>
 
 	<h2 id="tests">Tests & documentation</h2>
     
