@@ -4,7 +4,6 @@
     "description": "A PHP package to manage i18n: translations, pluralizations and date formats according to a localization.",
     "keywords": [ "i18n", "internationalization", "localization" ],
     "homepage": "http://github.com/atelierspierrot/internationalization",
-    "version": "1.0.2",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
@@ -17,7 +16,7 @@
     }],
     "require": {
         "php": ">=5.3.0",
-        "atelierspierrot/patterns": "dev-master"
+        "atelierspierrot/patterns": "1.*"
     },
     "require-dev": {
         "twig/twig": "1.*",
@@ -30,6 +29,9 @@
         "files": [ "src/I18n/aliases.php" ]
     },
     "extra": {
-        "views-functions": "src/I18n/aliases.php"
+        "views-functions": "src/I18n/aliases.php",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
