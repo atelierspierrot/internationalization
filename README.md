@@ -164,9 +164,9 @@ The latest version of this documentation is available online at <http://docs.ate
 
 >    Internationalization
 
->    https://github.com/atelierspierrot/internationalization
+>    http://github.com/atelierspierrot/internationalization
 
->    Copyleft 2013, Pierre Cassat and contributors
+>    Copyleft 2010-2014, Pierre Cassat and contributors
 
 >    Licensed under the GPL Version 3 license.
 

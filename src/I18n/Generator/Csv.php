@@ -2,7 +2,7 @@
 /*
 # ***** BEGIN LICENSE BLOCK *****
 # This file is part of the Internationalization package
-# Copyleft (c) 2010 Pierre Cassat and contributors
+# Copyleft (c) 2010-2014 Pierre Cassat and contributors
 #
 # <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
 #
@@ -29,7 +29,7 @@ namespace I18n\Generator;
 use I18n\GeneratorInterface;
 
 /**
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author 		Piero Wbmstr <me@e-piwi.fr>
  */
 class Csv implements GeneratorInterface
 {
