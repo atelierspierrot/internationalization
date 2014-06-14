@@ -2,7 +2,7 @@
 /*
 # ***** BEGIN LICENSE BLOCK *****
 # This file is part of the Internationalization package
-# Copyleft (c) 2010 Pierre Cassat and contributors
+# Copyleft (c) 2010-2014 Pierre Cassat and contributors
 #
 # <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
 #
@@ -27,7 +27,7 @@
 namespace I18n;
 
 /**
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author 		Piero Wbmstr <me@e-piwi.fr>
  */
 class Generator
 {
