@@ -20,15 +20,15 @@ To inform Twig that you want to use the extension, just write:
     // Creation of the I18n instance (statically) passing it the Loader
     $translator = \I18n\I18n::getInstance($i18n_loader);
 
-    // Creation of the Twig loader and environement
+    // Creation of the Twig loader and environment
     $loader = new Twig_Loader_String();
     $twig = new Twig_Environment($loader);
 
-    // addition of the extension to the environement
+    // addition of the extension to the environment
     $twig->addExtension(new \I18n\Twig\I18nExtension($translator)); 
 
 As you can see, you need to pass a translator instance to the extension constructor ; this
-is just to force you to first define your internationalization environement.
+is just to force you to first define your internationalization environment.
 
 ### Extension filters
 
@@ -59,7 +59,7 @@ You can also use the `translate`, `pluralize` and `datify` functions:
 
 ### Extension tags
 
-Finally, for a better manipulation, the `translate` and `pluralize` functionalities are also
+Finally, for a better manipulation, the `translate` and `pluralize` features are also
 defined as tags that can receive a set of parameters in any order.
 
 The `translate` tag can be used as a block, with the string you want to translate as body,
