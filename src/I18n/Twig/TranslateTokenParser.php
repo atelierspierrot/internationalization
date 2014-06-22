@@ -1,37 +1,26 @@
 <?php
-/*
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of the Internationalization package
-# Copyleft (c) 2010-2014 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# Internationalization package is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# Internationalization package is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
-#
-# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
-#
-# ***** END LICENSE BLOCK ***** */
+/**
+ * PHP package to manage i18n by Les Ateliers Pierrot
+ * Copyleft (c) 2010-2014 Pierre Cassat and contributors
+ * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+ * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+ * Sources <http://github.com/atelierspierrot/internationalization>
+ */
+
 
 namespace I18n\Twig;
 
-use \Twig_TokenParser, \Twig_Token, \Twig_NodeInterface,
-    \Twig_Node_Text, \Twig_Node_Print, \Twig_Node_Expression_Name,
-    \Twig_Node_Expression_Constant, \Twig_Node_Expression_Array,
-    \Twig_Error_Syntax;
-
-use \I18n\I18n, \I18n\Twig\TranslateNode;
+use \Twig_TokenParser;
+use \Twig_Token;
+use \Twig_NodeInterface;
+use \Twig_Node_Text;
+use \Twig_Node_Print;
+use \Twig_Node_Expression_Name;
+use \Twig_Node_Expression_Constant;
+use \Twig_Node_Expression_Array;
+use \Twig_Error_Syntax;
+use \I18n\I18n;
+use \I18n\Twig\TranslateNode;
 
 /**
  * Use the I18n\I18n::translate function
@@ -56,7 +45,8 @@ use \I18n\I18n, \I18n\Twig\TranslateNode;
  * {% translate { 'arg1': "value1", 'arg2': 567 } "your string index" %}
  * </pre>
  */
-class TranslateTokenParser extends Twig_TokenParser
+class TranslateTokenParser
+    extends Twig_TokenParser
 {
 
     public function parse(Twig_Token $token)
