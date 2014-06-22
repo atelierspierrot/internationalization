@@ -1,38 +1,22 @@
 <?php
-/*
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of the Internationalization package
-# Copyleft (c) 2010-2014 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# Internationalization package is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# Internationalization package is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
-#
-# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
-#
-# ***** END LICENSE BLOCK ***** */
+/**
+ * PHP package to manage i18n by Les Ateliers Pierrot
+ * Copyleft (c) 2010-2014 Pierre Cassat and contributors
+ * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+ * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+ * Sources <http://github.com/atelierspierrot/internationalization>
+ */
+
 
 namespace I18n;
 
-use \Locale,
-    \NumberFormatter,
-    \IntlDateFormatter,
-    \DateTime;
+use \Locale;
+use \NumberFormatter;
+use \IntlDateFormatter;
+use \DateTime;
 
-use Patterns\Abstracts\AbstractSingleton,
-    Patterns\Interfaces\TranslatableInterface;
+use \Patterns\Abstracts\AbstractSingleton;
+use \Patterns\Interfaces\TranslatableInterface;
 
 use I18n\Loader;
 
@@ -47,7 +31,9 @@ use I18n\Loader;
  *
  * @author      Piero Wbmstr <me@e-piwi.fr>
  */
-class I18n extends AbstractSingleton implements TranslatableInterface
+class I18n
+    extends AbstractSingleton
+    implements TranslatableInterface
 {
 
     /**
@@ -85,11 +71,11 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     /**
      * Initialization : the true constructor
      *
-     * @param oject $loader A `I18n\Loader` instance object
-     * @param string $lang A language code to use by default
-     * @param string $timezone A timezone code to use by default
-     * @return void
-     * @throws Throws a `I18nException` if no default locale is defined and the `$lang` argument 
+     * @param   \I18n\Loader  $loader
+     * @param   string $lang A language code to use by default
+     * @param   string $timezone A timezone code to use by default
+     * @return  void
+     * @throws  \I18n\I18nException if no default locale is defined and the `$lang` argument
      *          is empty, and if no default timezone is defined and the `$timezone` argument
      *          is empty
      */
@@ -125,11 +111,11 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      * This will parse the current language db file, or take it from the cache if so and load
      * the strings table in `$this->language_strings`.
      *
-     * @param bool $throw_errors Throw errors while re-creating the databases (default is `false`)
-     * @param bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` (default is `false`)
-     * @return void
-     * @throws Throws a `I18nException` if the database file seems to be malformed, and a 
-     *          `I18nInvalidArgumentException` it the file can't be found
+     * @param   bool $throw_errors Throw errors while re-creating the databases (default is `false`)
+     * @param   bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` (default is `false`)
+     * @return  void
+     * @throws  \I18n\I18nException if the database file seems to be malformed, and a
+     * @throws  \I18n\I18nInvalidArgumentException it the file can't be found
      */
     protected function _loadLanguageStrings($throw_errors = true, $force_rebuild = false)
     {
@@ -181,8 +167,8 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     /**
      * Store the loader
      *
-     * @param object $loader An instance of `I18n\Loader`
-     * @return self Returns `$this` for method chaining
+     * @param   \I18n\Loader $loader
+     * @return  self
      */
     public function setLoader(Loader $loader)
     {
@@ -193,7 +179,7 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     /**
      * Gets the loader
      *
-     * @return object The instance of `I18n\Loader`
+     * @return \I18n\Loader
      */
     public function getLoader()
     {
@@ -205,11 +191,11 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This will actually define a new default Locale and load the language strings database.
      *
-     * @param string $lang A language code to use by default
-     * @param bool $throw_errors Throw errors while re-creating the databases (default is `false`)
-     * @param bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` (default is `false`)
-     * @return self Returns `$this` for method chaining
-     * @throws Throws a `I18nInvalidArgumentException` it the language is not available
+     * @param   string $lang A language code to use by default
+     * @param   bool $throw_errors Throw errors while re-creating the databases (default is `false`)
+     * @param   bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` (default is `false`)
+     * @return  self Returns `$this` for method chaining
+     * @throws  \I18n\I18nInvalidArgumentException it the language is not available
      */
     public function setLanguage($lang, $throw_errors = true, $force_rebuild = false)
     {
@@ -316,8 +302,8 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     /**
      * Define a new timezone for the system
      *
-     * @param string $locale The full timezone string to define
-     * @return self Returns `$this` for method chaining
+     * @param string $timezone The full timezone string to define
+     * @return self
      */
     public function setTimezone($timezone)
     {
@@ -575,13 +561,13 @@ class I18n extends AbstractSingleton implements TranslatableInterface
     }
     
     /**
-     * Internaly factorize the Locale methods
+     * Internally factorize the Locale methods
      *
-     * @param string $fct_name The name of the method to execute on `Locale`
-     * @param string $for_locale The locale to work on, by default this will be the current locale
-     * @param string $lang The language to use, by default this will be the current locale
-     * @param bool $do_array Do we have to pass both `$for_locale` and `$lang` arguments (default is `true`)
-     * @return misc The result of `Locale:: $fct_name ( $for_locale , $lang )`
+     * @param   string $fct_name The name of the method to execute on `Locale`
+     * @param   string $for_locale The locale to work on, by default this will be the current locale
+     * @param   string $lang The language to use, by default this will be the current locale
+     * @param   bool $do_array Do we have to pass both `$for_locale` and `$lang` arguments (default is `true`)
+     * @return  mixed The result of `Locale:: $fct_name ( $for_locale , $lang )`
      */
     protected function _callInternalLocale($fct_name, $for_locale = null, $lang = null, $do_array = true)
     {
@@ -607,11 +593,11 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This is called by aliases `_N` and `numberify`.
      *
-     * @param numeric $number The number value to parse
-     * @param string $lang The language to use, by default this will be the current locale
-     * @return string The number value written in the locale
-     * @see _N()
-     * @see numberify()
+     * @param   int $number The number value to parse
+     * @param   string $lang The language to use, by default this will be the current locale
+     * @return  string The number value written in the locale
+     * @see     _N()
+     * @see     numberify()
      */
     public static function getLocalizedNumberString($number, $lang = null)
     {
@@ -633,11 +619,11 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This is called by aliases `_C` and `currencify`.
      *
-     * @param numeric $number The price value to parse
-     * @param string $lang The language to use, by default this will be the current locale
-     * @return string The price value written in the locale with a currency sign
-     * @see _C()
-     * @see currencify()
+     * @param   int $number The price value to parse
+     * @param   string $lang The language to use, by default this will be the current locale
+     * @return  string The price value written in the locale with a currency sign
+     * @see     _C()
+     * @see     currencify()
      */
     public static function getLocalizedPriceString($number, $lang = null)
     {
@@ -659,14 +645,14 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This is called by aliases `_D` and `datify`.
      *
-     * @param object $date The date value to parse as a `DateTime` object
-     * @param string $mask A mask to use for date writing (by default, the `datetime_mask_icu` translation 
-     *          string will be used, or no mask at all if it is not defined)
-     * @param string $charset The charset to use (default is `utf-8`)
-     * @param string $lang The language to use, by default this will be the current locale
-     * @return string The date value written in the locale
-     * @see _D()
-     * @see datify()
+     * @param   \DateTime $date The date value to parse as a `DateTime` object
+     * @param   string $mask    A mask to use for date writing (by default, the `datetime_mask_icu` translation
+     *                          string will be used, or no mask at all if it is not defined)
+     * @param   string $charset The charset to use (default is `utf-8`)
+     * @param   string $lang The language to use, by default this will be the current locale
+     * @return  string The date value written in the locale
+     * @see     _D()
+     * @see     datify()
      */
     public static function getLocalizedDateString(DateTime $date, $mask = null, $charset = 'UTF-8', $lang = null)
     {
@@ -711,12 +697,12 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This is called by aliases `_T` and `translate`.
      *
-     * @param string $index The index of the translation
-     * @param array $args The optional array of arguments for the final string replacements
-     * @param str $lang The language code to load translation from
-     * @return str Returns the translated string if it exists in the current language, with variables replacements
-     * @see _T()
-     * @see translate()
+     * @param   string $index The index of the translation
+     * @param   array $args The optional array of arguments for the final string replacements
+     * @param   string $lang The language code to load translation from
+     * @return  string Returns the translated string if it exists in the current language, with variables replacements
+     * @see     _T()
+     * @see     translate()
      */
     public static function translate($index, array $args = null, $lang = null)
     {
@@ -747,13 +733,13 @@ class I18n extends AbstractSingleton implements TranslatableInterface
      *
      * This is called by aliases `_P` and `pluralize`.
      *
-     * @param array $indexes An array of translation strings indexes to choose in considering the counter value
-     * @param num $number The value of the counter to consider
-     * @param array $args The optional array of arguments for the final string replacements
-     * @param str $lang The language code to load translation from
-     * @return str Returns the translated string fot the counter value if it exists, in the current language and with variables replacements
-     * @see _P()
-     * @see pluralize()
+     * @param   array $indexes An array of translation strings indexes to choose in considering the counter value
+     * @param   int $number The value of the counter to consider
+     * @param   array $args The optional array of arguments for the final string replacements
+     * @param   string $lang The language code to load translation from
+     * @return  string Returns the translated string fot the counter value if it exists, in the current language and with variables replacements
+     * @see     _P()
+     * @see     pluralize()
      */
     public static function pluralize(array $indexes = array(), $number = 0, array $args = null, $lang = null)
     {
