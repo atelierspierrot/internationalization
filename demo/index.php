@@ -147,6 +147,7 @@ $i18n_loader = new \I18n\Loader(array(
     'language_strings_db_directory'  => __DIR__.'/i18n',
     'language_directory' => __DIR__.'/i18n/%s',
     'force_rebuild' => true,
+    'force_rebuild_on_update' => true,
 ));
 $translator = \I18n\I18n::getInstance($i18n_loader);
 /*
@@ -178,6 +179,9 @@ echo 'require_once "path/to/I18n-package/src/I18n/aliases.php";';
 <h3>Tests in english</h3>
 
 <p>As english is the default language, no need to declare it ...</p>
+<?php
+$translator->setLanguage("en");
+?>
 
 <p>The <var>translate</var> basic function:</p>
     <pre class="code" data-language="php">
@@ -318,6 +322,7 @@ above, or define it globally using:</p>
     <pre class="code" data-language="php">
 <?php
 echo 'echo $translator->setLanguage("fr")'."\n";
+$translator->setLanguage("fr");
 ?>
     </pre>
 
@@ -373,6 +378,81 @@ echo 'echo $translator->getLocaleVariant("fr")'."\n";
 echo '=> '.$translator->getLocaleVariant('fr')."\n";
 echo 'echo $translator->getLocaleVariant("en","fr")'."\n";
 echo '=> '.$translator->getLocaleVariant('en','fr')."\n";
+?>
+    </pre>
+
+    <h3>Language strings special cases</h3>
+
+<p>To let translations be compliant with each language requirements (gender, number ...), 
+a special prefix can be used with language strings giving an info about the special cases that must apply:</p>
+
+<p>To build an example, we will analyze the translations of the words <code>house</code> and <code>language</code>.</p>
+
+<p>In english, where the gender doesn't matter, this would be:</p>
+<ul>
+    <li>a house</li>
+    <li>a language</li>
+</ul>
+
+<p>In french, where the gender DOES matter, this would be:</p>
+<ul>
+    <li>une maison (female - a house)</li>
+    <li>un langage (male - a language)</li>
+</ul>
+
+<p>Let's say we want to construct language strings to build singular and plural versions of these two words.</p>
+
+    <pre class="code" data-language="php">
+$en_strs = array(
+    'house' => 'house',
+    '[number:p]house' => 'houses',
+    'language' => 'language',
+    '[number:p]language' => 'languages',
+    'a %s' => 'a %s',
+    '[number:p]a %s' => 'some %s',
+);
+$fr_strs = array(
+    'house' => '[gender:f]maison',
+    '[number:p]house' => '[gender:f]maisons',
+    'language' => 'langage',
+    '[number:p]language' => 'langages',
+    'a %s' => 'un %s',
+    '[gender:f]a %s' => 'une %s',
+    '[number:p]a %s' => 'des %s',
+);
+    </pre>
+
+<p>We can use these strings writing:</p>
+
+    <pre class="code" data-language="php">
+function specialStrs($obj, $number) {
+    echo _T("This user have ")._T("a %s", array($obj))."\n";
+}
+$translator->setLanguage("en");
+specialStrs('house', 1);
+specialStrs('language', 1);
+specialStrs('house', 3);
+specialStrs('language', 3);
+$translator->setLanguage("fr");
+specialStrs('house', 1);
+specialStrs('language', 1);
+specialStrs('house', 3);
+specialStrs('language', 3);
+
+<?php
+function specialStrs($obj, $number) {
+    echo _T('This user have ')._T("a %s", array($obj))."\n";
+}
+$translator->setLanguage("en");
+specialStrs('house', 1);
+specialStrs('language', 1);
+specialStrs('house', 3);
+specialStrs('language', 3);
+$translator->setLanguage("fr");
+specialStrs('house', 1);
+specialStrs('language', 1);
+specialStrs('house', 3);
+specialStrs('language', 3);
 ?>
     </pre>
 

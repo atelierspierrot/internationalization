@@ -14,5 +14,13 @@ $i18n_fr=array (
   'test_item_multi_args' => 'Il y a %nb% items - J\'ai eu les arguments : « %arg1% » et « %arg2% »',
   'Test of non-indexed string' => 'Un test de chaîne traduite non-indéxée',
   'html_test' => 'Un test avec des <b>tags</b> <abbr title="Hyper Text Markup Language">HTML</abbr> …',
+  'house' => '[gender:f]maison',
+  '[number:p]house' => '[gender:f]maisons',
+  'language' => 'langage',
+  '[number:p]language' => 'langages',
+  'a %s' => 'un %s',
+  '[gender:f]a %s' => 'une %s',
+  '[number:p]a %s' => 'des %s',
+  'This user have ' => 'Cet utilisateur a ',
 );
 ?>

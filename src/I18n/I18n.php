@@ -1,12 +1,24 @@
 <?php
 /**
  * PHP package to manage i18n by Les Ateliers Pierrot
- * Copyleft (c) 2010-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2010-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <http://github.com/atelierspierrot/internationalization>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 
 namespace I18n;
 
@@ -18,7 +30,7 @@ use \DateTime;
 use \Patterns\Abstracts\AbstractSingleton;
 use \Patterns\Interfaces\TranslatableInterface;
 
-use I18n\Loader;
+use \I18n\Loader;
 
 /**
  * Internationalization class
@@ -112,12 +124,13 @@ class I18n
      * the strings table in `$this->language_strings`.
      *
      * @param   bool $throw_errors Throw errors while re-creating the databases (default is `false`)
-     * @param   bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` (default is `false`)
+     * @param   bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` if it does not exist (default is `false`)
+     * @param   bool $force_rebuild_on_update Force the system to rebuild the databases using `I18n\Generator` if it's more recent than language strings files (default is `false`)
      * @return  void
      * @throws  \I18n\I18nException if the database file seems to be malformed, and a
      * @throws  \I18n\I18nInvalidArgumentException it the file can't be found
      */
-    protected function _loadLanguageStrings($throw_errors = true, $force_rebuild = false)
+    protected function _loadLanguageStrings($throw_errors = true, $force_rebuild = false, $force_rebuild_on_update = false)
     {
         $_fn = $this->loader->buildLanguageFileName($this->lang);
         $_f = $this->loader->buildLanguageFilePath($this->lang);
@@ -126,16 +139,22 @@ class I18n
             return;
         }
 
+        $db_f = $this->loader->buildLanguageDBFilePath();
         if (@file_exists($_f)) {
-            $_v = $this->loader->buildLanguageVarname($this->lang);
-            include $_f;
-            if (isset($$_v)) {
-                $this->language_strings = $$_v;
-                $this->language_strings_cache[$_f] = $this->language_strings;
+            if ($force_rebuild_on_update && filemtime($db_f)>filemtime($_f)) {
+                $this->_rebuildLanguageStringsFiles();
+                $this->_loadLanguageStrings();
             } else {
-                throw new I18nException(
-                    sprintf('Language strings seems to be malformed in file "%s" (must be a classic array like "string_index"=>"string in the language")!', $_fn)
-                );
+                $_v = $this->loader->buildLanguageVarname($this->lang);
+                include $_f;
+                if (isset($$_v)) {
+                    $this->language_strings = $$_v;
+                    $this->language_strings_cache[$_f] = $this->language_strings;
+                } else {
+                    throw new I18nException(
+                        sprintf('Language strings seems to be malformed in file "%s" (must be a classic array like "string_index"=>"string in the language")!', $_fn)
+                    );
+                }
             }
         } elseif ($force_rebuild) {
             $this->_rebuildLanguageStringsFiles();
@@ -154,8 +173,7 @@ class I18n
      */
     protected function _rebuildLanguageStringsFiles()
     {
-        $db_filepath = rtrim($this->loader->getOption('language_strings_db_directory'), '/')
-            .'/'.$this->loader->getOption('language_strings_db_filename');
+        $db_filepath = $this->loader->buildLanguageDBFilePath();
         $generator = new Generator($db_filepath);
         $generator->generate();
     }
@@ -357,9 +375,38 @@ class I18n
         if (empty($arguments)) return $str;
         $arg_mask = $this->loader->getOption('arg_wrapper_mask');
         foreach($arguments as $name=>$value) {
-            $str = strtr($str, array( sprintf($arg_mask, $name) => $value));
+            if (is_string($name)) {
+                $str = strtr($str, array( sprintf($arg_mask, $name) => $value));
+            } else {
+                $str = sprintf($str, self::translate($value));
+            }
         }
         return $str;
+    }
+
+    /**
+     * Get the meta-data of a language string
+     *
+     * @param   string  $str
+     * @return  array   array( (string) $str , (array) $info )
+     */
+    public function parseStringMetadata($str)
+    {
+        $info = array();
+        if (0!==preg_match('~^\[([^\]]+)\]~i', $str, $matches)) {
+            $str = str_replace($matches[0], '', $str);
+            $types = $matches[1];
+            $types_items = explode(';', $types);
+            foreach ($types_items as $item) {
+                $parts = explode(':', $item);
+                if (count($parts)>1) {
+                    $info[$parts[0]] = $parts[1];
+                } else {
+                    $info[] = $parts[0];
+                }
+            }
+        }
+        return array($str, $info);
     }
 
     /**
@@ -713,6 +760,11 @@ class I18n
         }
         if ($_this->hasLocalizedString($index)) {
             $str = $_this->getLocalizedString($index);
+            list($str_tmp, $meta) = $_this->parseStringMetadata($str);
+            if (!empty($meta)) {
+                $str = $str_tmp;
+                var_export($meta);
+            }
             $str = $_this->parseString($str, $args);
         } elseif ($_this->loader->getOption('show_untranslated', false)) {
             $str = $_this->_showUntranslated($index, $args);
