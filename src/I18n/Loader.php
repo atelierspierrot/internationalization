@@ -1,12 +1,24 @@
 <?php
 /**
  * PHP package to manage i18n by Les Ateliers Pierrot
- * Copyleft (c) 2010-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2010-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <http://github.com/atelierspierrot/internationalization>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 
 namespace I18n;
 
@@ -28,20 +40,21 @@ class Loader
             'gb' => 'en_GB_UKP',
             'fr' => 'fr_FR_EUR'
         ),
-        'default_language'      => 'en',
+        'default_language'              => 'en',
         // "%%" will be considered as a literal percent sign
-        'arg_wrapper_mask'      => "%%%s%%",
+        'arg_wrapper_mask'              => "%%%s%%",
         // paths
-        'language_varname'      => 'i18n_%s',
-        'language_directory'    => null,
-        'language_filename'     => 'i18n.%s.php',
+        'language_varname'              => 'i18n_%s',
+        'language_directory'            => null,
+        'language_filename'             => 'i18n.%s.php',
         // for CSV database rebuild
-        'language_strings_db_directory'  => null,
+        'language_strings_db_directory' => null,
         'language_strings_db_filename'  => 'i18n.csv',
-        'force_rebuild'         => false,
+        'force_rebuild'                 => false,
+        'force_rebuild_on_update'       => false,
         // show the untranslated strings for debug
-        'show_untranslated'     => false,
-        'show_untranslated_wrapper' => '<span style="color:red"><strong>%s</strong> (%s)</span>',
+        'show_untranslated'             => false,
+        'show_untranslated_wrapper'     => '<span style="color:red"><strong>%s</strong> (%s)</span>',
     );
 
     /**
@@ -107,6 +120,27 @@ class Loader
     public function buildLanguageVarname($lang)
     {
         return $this->getParsedOption('language_varname', $lang);
+    }
+
+    /**
+     * Build the file name for the language CSV database 
+     *
+     * @return  string
+     */
+    public function buildLanguageDBFileName()
+    {
+        return $this->getParsedOption('language_strings_db_filename');
+    }
+
+    /**
+     * Build the file path for the language CSV database 
+     *
+     * @return  string
+     */
+    public function buildLanguageDBFilePath()
+    {
+        return rtrim($this->getParsedOption('language_strings_db_directory'), '/')
+            .'/'.$this->getParsedOption('language_strings_db_filename');
     }
 
 }

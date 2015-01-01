@@ -13,3 +13,11 @@ test_item_two_args;Deux items - J'ai eu les arguments : « %arg1% » et « %
 test_item_multi_args;Il y a %nb% items - J'ai eu les arguments : « %arg1% » et « %arg2% »;There are %nb% items - I received arguments : « %arg1% » and « %arg2% »
 ;Un test de chaîne traduite non-indéxée;Test of non-indexed string
 html_test;"Un test avec des <b>tags</b> <abbr title=""Hyper Text Markup Language"">HTML</abbr> …";"A test with <abbr title=""Hyper Text Markup Language"">HTML</abbr> <b>tags</b> …"
+;[gender:f]maison;house
+[number:p]house;[gender:f]maisons;houses
+;langage;language
+[number:p]language;langages;languages
+a %s;un %s;a %s
+[gender:f]a %s;une %s;a %s
+[number:p]a %s;des %s;some %s
+;Cet utilisateur a ;This user have 
