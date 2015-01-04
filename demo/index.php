@@ -81,6 +81,7 @@ function getPhpClassManualLink( $class_name, $ln='en' )
                 <li><a href="index.php#notes">First notes</a></li>
                 <li><a href="index.php#tests">Tests & Doc</a></li>
                 <li><a href="index.php#options">Loader options</a></li>
+                <li><a href="index.php#loader">Load a language file</a></li>
                 <li><a href="index.php#debug">I18n debug</a></li>
             </ul></li>
             <li><a href="twig.php">Twig extension</a><ul>
@@ -529,6 +530,47 @@ echo '=> '._T('noexist', array(
 echo '$translator->setDefaultFromHttp();'."\n";
 ?>
     </pre>
+
+    <h2 id="loader">Load a language file and use it</h2>
+
+    <pre class="code" data-language="php">
+<?php
+
+echo '$translator->loadFile("test-i18n.csv");'.PHP_EOL;
+$translator->loadFile('test-i18n.csv');
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo "Test of an old string:\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+echo "\n";
+echo "\n";
+echo '$ln_f = __DIR__."/i18n/subdir/test2-i18n.csv";'.PHP_EOL;
+$ln_f = __DIR__.'/i18n/subdir/test2-i18n.csv';
+echo '$translator->loadFile($ln_f);'.PHP_EOL;
+$translator->loadFile($ln_f);
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo "Test of an old string:\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+echo "\n";
+echo "\n";
+$translator->setLanguage("en");
+echo "Same tests in english:\n";
+echo "\n";
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+?>
+</pre>
 
     <h2 id="debug">I18n debug</h2>
 
