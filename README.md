@@ -33,17 +33,21 @@ from Github.
 Then, to use the package classes, you just need to register the `I18n` namespace directory
 using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom *autoloader*:
 
-    require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-    $classLoader = new SplClassLoader('I18n', '/path/to/package/src');
-    $classLoader->register();
+```php
+require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
+$classLoader = new SplClassLoader('I18n', '/path/to/package/src');
+$classLoader->register();
+```
 
 If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
 in your `composer.json`:
 
-    "require": {
-        ...
-        "atelierspierrot/internationalization": "dev-master"
-    }
+```json
+"require": {
+    ...
+    "atelierspierrot/internationalization": "dev-master"
+}
+```
 
 The namespace will be automatically added to the project Composer's *autoloader*.
 
@@ -54,28 +58,30 @@ The namespace will be automatically added to the project Composer's *autoloader*
 
 To create a new I18n instance, you need to pass it a `I18n\Loader` object:
 
-    // Creation of the I18n Loader
-    $i18n_loader = new \I18n\Loader(array(
+```php
+// Creation of the I18n Loader
+$i18n_loader = new \I18n\Loader(array(
 
-        // this is the directory where your language strings are defined
-        'language_directory' => __DIR__.'/i18n',
+    // this is the directory where your language strings are defined
+    'language_directory' => __DIR__.'/i18n',
 
-        // this is the list of available languages
-        'available_languages' => array(
-            'en' => 'en_US_USD',
-            'gb' => 'en_GB_UKP',
-            'fr' => 'fr_FR_EUR'
-        ),
-        'default_language' => 'en',
+    // this is the list of available languages
+    'available_languages' => array(
+        'en' => 'en_US_USD',
+        'gb' => 'en_GB_UKP',
+        'fr' => 'fr_FR_EUR'
+    ),
+    'default_language' => 'en',
 
-        // this is the tag construction used for replacements in strings
-        // by default, "%arg%" will be replacement by the argument "arg" value
-        // as this will be passed to a 'sprintf' PHP function, literal percent is written '%%'
-        'arg_wrapper_mask' => "%%%s%%",
-    ));
+    // this is the tag construction used for replacements in strings
+    // by default, "%arg%" will be replacement by the argument "arg" value
+    // as this will be passed to a 'sprintf' PHP function, literal percent is written '%%'
+    'arg_wrapper_mask' => "%%%s%%",
+));
 
-    // Creation of the I18n instance (statically) passing it the Loader
-    $translator = \I18n\I18n::getInstance($i18n_loader);
+// Creation of the I18n instance (statically) passing it the Loader
+$translator = \I18n\I18n::getInstance($i18n_loader);
+```
 
 For a full list of possible Loader options, please have a look in source code.
 
@@ -92,32 +98,38 @@ As you can see, the I18n class is defined as a Singleton object: any future call
 
 Then, to actually use the translated value of a string, use the `translate` method:
 
-    $translator->translate( 'string_index' [, array( arguments )] [, language code] )
+```php
+$translator->translate( 'string_index' [, array( arguments )] [, language code] )
+```
 
 You can use the `pluralize` method to choose a translated string depending on a number of items:
 
-    $indexes = array(
-        0=>'test_item_zero',
-        1=>'test_item_one',
-        2=>'test_item_two',
-        3=>'test_item_multi'
-    );
-    $translator->pluralize( $indexes, $number_of_items [, array( arguments )] [, language code] )
+```php
+$indexes = array(
+    0=>'test_item_zero',
+    1=>'test_item_one',
+    2=>'test_item_two',
+    3=>'test_item_multi'
+);
+$translator->pluralize( $indexes, $number_of_items [, array( arguments )] [, language code] )
+```
 
 ### Translation strings definition
 
 By default (this can be over-write in the Loader), the I18n object will load the strings
 defined as a PHP array like:
 
-    $i18n_en = array (
-      'datetime_mask' => '%a %e %m %Y %H:%M:%S',
-      'test' => 'Test in english',
-      'test_args' => 'I received arguments : « %arg1% » and « %arg2% »',
-      'test_item_zero' => 'No item',
-      'test_item_one' => 'Just one item',
-      'test_item_two' => 'Two items',
-      'test_item_multi' => 'There are %nb% items',
-    );
+```php
+$i18n_en = array (
+  'datetime_mask' => '%a %e %m %Y %H:%M:%S',
+  'test' => 'Test in english',
+  'test_args' => 'I received arguments : « %arg1% » and « %arg2% »',
+  'test_item_zero' => 'No item',
+  'test_item_one' => 'Just one item',
+  'test_item_two' => 'Two items',
+  'test_item_multi' => 'There are %nb% items',
+);
+```
 
 This may be defined in a file called `i18n.CODE.php` where `CODE` is the two letter reference
 of the language. These files will be searched and loaded from the `language_directory` loader
@@ -127,7 +139,9 @@ option value.
 
 The I18n object is designed to be able to load multiple language files easily with:
 
-    $i18n->loadFile( my file path )
+```php
+$i18n->loadFile( my file path )
+```
 
 Each file loaded is stored in the internal cache system of the object (a simple PHP array).
 
@@ -136,17 +150,19 @@ Each file loaded is stored in the internal cache system of the object (a simple 
 A set of aliases functions, defined in the global namespace, are available and auto-loaded
 by Composer:
 
-    function _T(...) = $i18n->translate(...)
-        or
-    function translate(...) = $i18n->translate(...)
+```php
+function _T(...) = $i18n->translate(...)
+#    or
+function translate(...) = $i18n->translate(...)
 
-    function _P(...) = $i18n->pluralize(...)
-        or
-    function pluralize(...) = $i18n->pluralize(...)
+function _P(...) = $i18n->pluralize(...)
+#    or
+function pluralize(...) = $i18n->pluralize(...)
 
-    function _D(...) = $i18n->getLocalizedDateString(...)
-        or
-    function datify(...) = $i18n->getLocalizedDateString(...)
+function _D(...) = $i18n->getLocalizedDateString(...)
+#    or
+function datify(...) = $i18n->getLocalizedDateString(...)
+```
 
 
 ## Extensions
