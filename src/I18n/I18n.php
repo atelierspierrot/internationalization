@@ -27,16 +27,13 @@ use \Locale;
 use \NumberFormatter;
 use \IntlDateFormatter;
 use \DateTime;
-
 use \Patterns\Abstracts\AbstractSingleton;
 use \Patterns\Interfaces\TranslatableInterface;
-
-use \I18n\Loader;
 
 /**
  * Internationalization class
  *
- * For more informations, see:
+ * For more information, see:
  * -   <http://www.unicode.org/reports/tr35/>
  * -   <http://userguide.icu-project.org/locale>
  * -   <http://userguide.icu-project.org/formatparse/datetime>
@@ -50,30 +47,29 @@ class I18n
 {
 
     /**
-     * The loader object
-     *
-     * @see I18n\Loader
+     * @var \I18n\LoaderInterface The loader object
      */
     protected $loader;
 
     /**
-     * The current language code
+     * @var string The current language code
      */
     protected $lang;
 
     /**
-     * The current timezone code
+     * @var string The current timezone code
      */
     protected $timezone;
 
     /**
-     * The translated strings in the current language code
+     * @var array The translated strings in the current language code
      */
     protected $language_strings;
 
     /**
      * An array to cache translated strings once they are loaded in a language
      * to avoid parsing the same db file more than once
+     * @var array
      */
     private $language_strings_cache = array();
 
@@ -84,15 +80,15 @@ class I18n
     /**
      * Initialization : the true constructor
      *
-     * @param   \I18n\Loader  $loader
+     * @param   \I18n\LoaderInterface  $loader
      * @param   string $lang A language code to use by default
      * @param   string $timezone A timezone code to use by default
-     * @return  void
+     * @return  self
      * @throws  \I18n\I18nException if no default locale is defined and the `$lang` argument
      *          is empty, and if no default timezone is defined and the `$timezone` argument
      *          is empty
      */
-    protected function init(Loader $loader, $lang = null, $timezone = null)
+    protected function init(LoaderInterface $loader, $lang = null, $timezone = null)
     {
         $this->setLoader($loader);
         if (is_null($lang)) {
@@ -103,7 +99,8 @@ class I18n
                 );
             }
         }
-        $this->setLanguage($lang, false, $this->loader->getOption('force_rebuild'));
+
+        $this->setLanguage($lang, false, $this->getLoader()->getOption('force_rebuild'));
         if (is_null($timezone)) {
             $timezone = @date_default_timezone_get();
             if (empty($timezone)) {
@@ -113,44 +110,64 @@ class I18n
             }
         }
         $this->setTimezone($timezone);
+
         if (empty($this->language_strings)) {
-            $this->setLanguage($this->loader->getOption('default_language', 'en'), false, $this->loader->getOption('force_rebuild'));
+            $this->setLanguage(
+                $this->getLoader()->getOption('default_language', 'en'), 
+                false, 
+                $this->getLoader()->getOption('force_rebuild')
+            );
         }
+
+        return $this;
     }
 
     /**
      * Load the current language strings
      *
-     * This will parse the current language db file, or take it from the cache if so and load
+     * This will parse the current language db files, or take it from the cache if so and load
      * the strings table in `$this->language_strings`.
      *
      * @param   bool $throw_errors Throw errors while re-creating the databases (default is `false`)
      * @param   bool $force_rebuild Force the system to rebuild the databases using `I18n\Generator` if it does not exist (default is `false`)
      * @param   bool $force_rebuild_on_update Force the system to rebuild the databases using `I18n\Generator` if it's more recent than language strings files (default is `false`)
-     * @return  void
+     * @return  self
      * @throws  \I18n\I18nException if the database file seems to be malformed, and a
      * @throws  \I18n\I18nInvalidArgumentException it the file can't be found
      */
     protected function _loadLanguageStrings($throw_errors = true, $force_rebuild = false, $force_rebuild_on_update = false)
     {
-        $_fn = $this->loader->buildLanguageFileName($this->lang);
-        $_f = $this->loader->buildLanguageFilePath($this->lang);
-        if (isset($this->language_strings_cache[$_f])) {
-            $this->language_strings = $this->language_strings_cache[$_f];
-            return;
+        $_fn = $this->getLoader()->buildLanguageFileName($this->lang);
+        $_f = $this->getLoader()->buildLanguageFilePath($this->lang);
+
+        if (
+            isset($this->language_strings_cache[$_f]) &&
+            isset($this->language_strings_cache[$this->lang])
+        ) {
+            $this->language_strings = $this->language_strings_cache[$this->lang];
+            return $this;
         }
 
-        $db_f = $this->loader->buildLanguageDBFilePath();
+        $db_f = $this->getLoader()->buildLanguageDBFilePath();
         if (@file_exists($_f)) {
             if ($force_rebuild_on_update && filemtime($db_f)>filemtime($_f)) {
-                $this->_rebuildLanguageStringsFiles();
-                $this->_loadLanguageStrings();
+                return $this
+                    ->_rebuildLanguageStringsFiles()
+                    ->_loadLanguageStrings();
             } else {
-                $_v = $this->loader->buildLanguageVarname($this->lang);
+                $_v = $this->getLoader()->buildLanguageVarname($this->lang);
                 include $_f;
                 if (isset($$_v)) {
-                    $this->language_strings = $$_v;
-                    $this->language_strings_cache[$_f] = $this->language_strings;
+                    if (!isset($this->language_strings_cache[$this->lang])) {
+                        $this->language_strings_cache[$this->lang] = array();
+                    }
+                    $this->language_strings_cache[$this->lang] =
+                        array_merge($this->language_strings_cache[$this->lang], $$_v);
+                    $this->language_strings_cache[$_f] = array(
+                        'language'  => $this->lang,
+                        'strings'   => $$_v
+                    );
+                    return $this->_loadLanguageStrings();
                 } else {
                     throw new I18nException(
                         sprintf('Language strings seems to be malformed in file "%s" (must be a classic array like "string_index"=>"string in the language")!', $_fn)
@@ -158,25 +175,29 @@ class I18n
                 }
             }
         } elseif ($force_rebuild) {
-            $this->_rebuildLanguageStringsFiles();
-            $this->_loadLanguageStrings();
+            return $this
+                ->_rebuildLanguageStringsFiles()
+                ->_loadLanguageStrings();
         } elseif ($throw_errors) {
             throw new I18nInvalidArgumentException(
                 sprintf('Language strings file for language code "%s" not found (searched in "%s")!', $this->lang, $_f)
             );
         }
+
+        return $this;
     }
 
     /**
      * Rebuild the language strings databases with `I18n\Generator`
      *
-     * @return void
+     * @return self
      */
     protected function _rebuildLanguageStringsFiles()
     {
-        $db_filepath = $this->loader->buildLanguageDBFilePath();
+        $db_filepath = $this->getLoader()->buildLanguageDBFilePath();
         $generator = new Generator($db_filepath);
         $generator->generate();
+        return $this;
     }
 
 // --------------------
@@ -186,10 +207,10 @@ class I18n
     /**
      * Store the loader
      *
-     * @param   \I18n\Loader $loader
+     * @param   \I18n\LoaderInterface $loader
      * @return  self
      */
-    public function setLoader(Loader $loader)
+    public function setLoader(LoaderInterface $loader)
     {
         $this->loader = $loader;
         return $this;
@@ -198,11 +219,45 @@ class I18n
     /**
      * Gets the loader
      *
-     * @return \I18n\Loader
+     * @return \I18n\LoaderInterface
      */
     public function getLoader()
     {
         return $this->loader;
+    }
+
+    /**
+     * Load a new language file
+     * @param   string          $file_name
+     * @param   null|string     $dir_name
+     * @throws  \I18n\I18nException
+     * @throws  \Exception
+     */
+    public function loadFile($file_name, $dir_name = null)
+    {
+        try {
+            $loader = $this->getLoader();
+            $file_path = $loader->findLanguageDBFile(
+                !empty($file_name) ? basename($file_name) : $file_name,
+                !empty($dir_name) ? $dir_name : (
+                    !empty($file_name) ? dirname($file_name) : $dir_name
+                )
+            );
+            if ($file_path && file_exists($file_path)) {
+                $loader
+                    ->setOption('language_strings_db_directory', dirname($file_path))
+                    ->setOption('language_strings_db_filename', basename($file_path))
+                ;
+
+                $this->_loadLanguageStrings(true, true, true);
+            } else {
+                throw new I18nInvalidArgumentException(
+                    sprintf('Language file "%s" not found!', $file_name)
+                );
+            }
+        } catch (I18nException $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -222,13 +277,13 @@ class I18n
             $this->lang = $lang;
             $this->setLocale($this->getAvailableLocale($lang));
             $this->_loadLanguageStrings( $throw_errors, $force_rebuild );
-            return $this;
         } else {
             throw new I18nInvalidArgumentException(
                 sprintf('Language "%s" is not available in the application (available languages are %s)!', 
-                    $lang, join(', ', $this->loader->getOption('available_languages')))
+                    $lang, join(', ', $this->getLoader()->getOption('available_languages')))
             );
         }
+        return $this;
     }
 
     /**
@@ -244,7 +299,7 @@ class I18n
     /**
      * Try to get the browser default locale and use it
      *
-     * @return void
+     * @return self
      */
     public function setDefaultFromHttp()
     {
@@ -252,6 +307,7 @@ class I18n
         if (!empty($http_locale) && $this->isAvailableLanguage($http_locale)) {
             $this->setLanguage($http_locale);
         }
+        return $this;
     }
     
     /**
@@ -262,8 +318,8 @@ class I18n
      */
     public function isAvailableLanguage($lang)
     {
-        return array_key_exists($lang, $this->loader->getOption('available_languages')) ||
-            in_array($lang, $this->loader->getOption('available_languages'));
+        return array_key_exists($lang, $this->getLoader()->getOption('available_languages')) ||
+            in_array($lang, $this->getLoader()->getOption('available_languages'));
     }
     
     /**
@@ -277,7 +333,7 @@ class I18n
      */
     public function getAvailableLocale($lang)
     {
-        $langs = $this->loader->getOption('available_languages');
+        $langs = $this->getLoader()->getOption('available_languages');
         if (array_key_exists($lang, $langs)) {
             return $langs[$lang];
         } elseif (in_array($lang, $langs)) {
@@ -293,7 +349,10 @@ class I18n
      */
     public function getAvailableLanguages()
     {
-        return $this->loader->getOption('available_languages', array($this->loader->getOption('default_language', 'en')));
+        return $this->getLoader()->getOption(
+            'available_languages',
+            array($this->getLoader()->getOption('default_language', 'en'))
+        );
     }
     
     /**
@@ -374,7 +433,7 @@ class I18n
     public function parseString($str, array $arguments = null)
     {
         if (empty($arguments)) return $str;
-        $arg_mask = $this->loader->getOption('arg_wrapper_mask');
+        $arg_mask = $this->getLoader()->getOption('arg_wrapper_mask');
         foreach($arguments as $name=>$value) {
             if (is_string($name)) {
                 $str = strtr($str, array( sprintf($arg_mask, $name) => $value));
@@ -427,7 +486,7 @@ class I18n
                 $arguments .= '"'.$var.'" => '.str_replace(array("\n", "\t"), '', var_export($val,1)).', ';
             }
         }
-        return sprintf($this->loader->getOption('show_untranslated_wrapper', '%s'), $str, $arguments);
+        return sprintf($this->getLoader()->getOption('show_untranslated_wrapper', '%s'), $str, $arguments);
     }
 
 // --------------------
@@ -446,8 +505,8 @@ class I18n
             $original_lang = $this->getLanguage();
             $this->setLanguage( $lang );
         }
-        $formater = new NumberFormatter($this->getLocale(), NumberFormatter::CURRENCY);
-        $currency = $formater->getTextAttribute(NumberFormatter::CURRENCY_CODE);
+        $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::CURRENCY);
+        $currency = $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE);
         if (!empty($original_lang)) {
             $this->setLanguage( $original_lang );
         }
@@ -477,7 +536,7 @@ class I18n
             $original_lang = $this->getLanguage();
             $this->setLanguage( $lang );
         }
-        $db = $this->loader->getOption('available_languages');
+        $db = $this->getLoader()->getOption('available_languages');
         $full_locales = array();
         if (!empty($db)) {
             foreach($db as $ln=>$locale) {
@@ -654,8 +713,8 @@ class I18n
             $original_lang = $_this->getLanguage();
             $_this->setLanguage( $lang );
         }
-        $formater = new NumberFormatter($_this->getLocale(), NumberFormatter::DEFAULT_STYLE);
-        $str =  $formater->format($number);
+        $formatter = new NumberFormatter($_this->getLocale(), NumberFormatter::DEFAULT_STYLE);
+        $str =  $formatter->format($number);
         if (!empty($original_lang)) {
             $_this->setLanguage( $original_lang );
         }
@@ -680,8 +739,8 @@ class I18n
             $original_lang = $_this->getLanguage();
             $_this->setLanguage( $lang );
         }
-        $formater = new NumberFormatter($_this->getLocale(), NumberFormatter::CURRENCY);
-        $str = $formater->format($number);
+        $formatter = new NumberFormatter($_this->getLocale(), NumberFormatter::CURRENCY);
+        $str = $formatter->format($number);
         if (!empty($original_lang)) {
             $_this->setLanguage( $original_lang );
         }
@@ -764,7 +823,7 @@ class I18n
             list($str_tmp, $meta) = $_this->parseStringMetadata($str);
             if (!empty($meta)) {
                 $str = $str_tmp;
-                var_export($meta);
+//                var_export($meta);
             }
             $str = $_this->parseString($str, $args);
         } elseif ($_this->loader->getOption('show_untranslated', false)) {

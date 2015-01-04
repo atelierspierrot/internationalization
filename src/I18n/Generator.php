@@ -30,27 +30,52 @@ namespace I18n;
 class Generator
 {
 
+    /**
+     * @var \I18n\GeneratorInterface
+     */
     protected $generator;
 
+    /**
+     * @var string
+     */
     protected $db_filepath;
 
+    /**
+     * @param   string  $db_filepath
+     * @param   string  $generator
+     */
     public function __construct($db_filepath = null, $generator = 'csv')
     {
-        if (!empty($db_filepath)) $this->setDbFilepath($db_filepath);
-        if (!empty($generator)) $this->setGenerator($generator);
+        if (!empty($db_filepath)){
+            $this->setDbFilepath($db_filepath);
+        }
+        if (!empty($generator)) {
+            $this->setGenerator($generator);
+        }
     }
 
+    /**
+     * @param $path
+     * @return $this
+     */
     public function setDbFilepath($path)
     {
         $this->db_filepath = $path;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDbFilepath()
     {
         return $this->db_filepath;
     }
 
+    /**
+     * @param $name
+     * @return $this
+     */
     public function setGenerator($name)
     {
         $cls_name = '\I18n\Generator\\'.ucfirst($name);
@@ -71,15 +96,23 @@ class Generator
         return $this;
     }
 
+    /**
+     * @return GeneratorInterface
+     */
     public function getGenerator()
     {
         return $this->generator;
     }
 
+    /**
+     * @return bool
+     * @throws I18nException
+     */
     public function generate()
     {
-        $_f = $this->getDbFilepath();
-        $i18n = I18n::getInstance();
+        $ok     = false;
+        $_f     = $this->getDbFilepath();
+        $i18n   = I18n::getInstance();
         if (@file_exists($_f)) {
             $all_lang_strings = $this->getGenerator()->generate($_f, $i18n);
             foreach($all_lang_strings as $lang=>$strings) {
@@ -106,7 +139,8 @@ class Generator
             throw new I18nException(
                 sprintf('Language strings database file "%s" not found!', $_f)
             );
-        }        
+        }
+        return $ok;
     }
 
 }

@@ -81,6 +81,7 @@ function getPhpClassManualLink( $class_name, $ln='en' )
                 <li><a href="index.php#notes">First notes</a></li>
                 <li><a href="index.php#tests">Tests & Doc</a></li>
                 <li><a href="index.php#options">Loader options</a></li>
+                <li><a href="index.php#loader">Load a language file</a></li>
                 <li><a href="index.php#debug">I18n debug</a></li>
             </ul></li>
             <li><a href="twig.php">Twig extension</a><ul>
@@ -381,81 +382,6 @@ echo '=> '.$translator->getLocaleVariant('en','fr')."\n";
 ?>
     </pre>
 
-    <h3>Language strings special cases</h3>
-
-<p>To let translations be compliant with each language requirements (gender, number ...), 
-a special prefix can be used with language strings giving an info about the special cases that must apply:</p>
-
-<p>To build an example, we will analyze the translations of the words <code>house</code> and <code>language</code>.</p>
-
-<p>In english, where the gender doesn't matter, this would be:</p>
-<ul>
-    <li>a house</li>
-    <li>a language</li>
-</ul>
-
-<p>In french, where the gender DOES matter, this would be:</p>
-<ul>
-    <li>une maison (female - a house)</li>
-    <li>un langage (male - a language)</li>
-</ul>
-
-<p>Let's say we want to construct language strings to build singular and plural versions of these two words.</p>
-
-    <pre class="code" data-language="php">
-$en_strs = array(
-    'house' => 'house',
-    '[number:p]house' => 'houses',
-    'language' => 'language',
-    '[number:p]language' => 'languages',
-    'a %s' => 'a %s',
-    '[number:p]a %s' => 'some %s',
-);
-$fr_strs = array(
-    'house' => '[gender:f]maison',
-    '[number:p]house' => '[gender:f]maisons',
-    'language' => 'langage',
-    '[number:p]language' => 'langages',
-    'a %s' => 'un %s',
-    '[gender:f]a %s' => 'une %s',
-    '[number:p]a %s' => 'des %s',
-);
-    </pre>
-
-<p>We can use these strings writing:</p>
-
-    <pre class="code" data-language="php">
-function specialStrs($obj, $number) {
-    echo _T("This user have ")._T("a %s", array($obj))."\n";
-}
-$translator->setLanguage("en");
-specialStrs('house', 1);
-specialStrs('language', 1);
-specialStrs('house', 3);
-specialStrs('language', 3);
-$translator->setLanguage("fr");
-specialStrs('house', 1);
-specialStrs('language', 1);
-specialStrs('house', 3);
-specialStrs('language', 3);
-
-<?php
-function specialStrs($obj, $number) {
-    echo _T('This user have ')._T("a %s", array($obj))."\n";
-}
-$translator->setLanguage("en");
-specialStrs('house', 1);
-specialStrs('language', 1);
-specialStrs('house', 3);
-specialStrs('language', 3);
-$translator->setLanguage("fr");
-specialStrs('house', 1);
-specialStrs('language', 1);
-specialStrs('house', 3);
-specialStrs('language', 3);
-?>
-    </pre>
-
     <h2 id="options">Loader options</h2>
 
     <h3>Available languages</h3>
@@ -529,6 +455,47 @@ echo '=> '._T('noexist', array(
 echo '$translator->setDefaultFromHttp();'."\n";
 ?>
     </pre>
+
+    <h2 id="loader">Load a language file and use it</h2>
+
+    <pre class="code" data-language="php">
+<?php
+
+echo '$translator->loadFile("test-i18n.csv");'.PHP_EOL;
+$translator->loadFile('test-i18n.csv');
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo "Test of an old string:\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+echo "\n";
+echo "\n";
+echo '$ln_f = __DIR__."/i18n/subdir/test2-i18n.csv";'.PHP_EOL;
+$ln_f = __DIR__.'/i18n/subdir/test2-i18n.csv';
+echo '$translator->loadFile($ln_f);'.PHP_EOL;
+$translator->loadFile($ln_f);
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo "Test of an old string:\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+echo "\n";
+echo "\n";
+$translator->setLanguage("en");
+echo "Same tests in english:\n";
+echo "\n";
+echo "echo _T('test_string');".PHP_EOL;
+echo '=> '._T('test_string');
+echo "\n";
+echo 'echo _T("test")'."\n";
+echo '=> '._T('test');
+
+?>
+</pre>
 
     <h2 id="debug">I18n debug</h2>
 
