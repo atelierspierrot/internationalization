@@ -21,9 +21,8 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n;
-use \InvalidArgumentException;
-class I18nInvalidArgumentException extends InvalidArgumentException {}
+
+class I18nInvalidArgumentException extends \InvalidArgumentException {}
 
 // Endfile

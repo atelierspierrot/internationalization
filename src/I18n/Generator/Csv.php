@@ -33,6 +33,11 @@ class Csv
     implements GeneratorInterface
 {
 
+    /**
+     * @param string $from_file The file to read and parse
+     * @param \I18n\I18n $i18n The I18n instance
+     * @return array\null
+     */
     public function generate($from_file, \I18n\I18n $i18n)
     {
         $default = $i18n->getLoader()->getOption('default_language', 'en');
