@@ -24,6 +24,8 @@
 
 namespace I18n;
 
+use \Library\Helper\Directory as DirectoryHelper;
+
 /**
  * Locale codes DB from <http://www.iana.org/assignments/language-subtag-registry>
  *
@@ -72,7 +74,7 @@ class Iana
 
     public function getDbRealpath()
     {
-        return rtrim($this->getDbFilepath(), '/').'/'.$this->getDbFilename();
+        return DirectoryHelper::slashDirname($this->getDbFilepath()).$this->getDbFilename();
     }
 
     protected function _getOrigin()

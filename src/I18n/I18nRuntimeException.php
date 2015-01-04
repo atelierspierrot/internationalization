@@ -21,9 +21,8 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n;
-use \RuntimeException;
-class I18nRuntimeException extends RuntimeException {}
+
+class I18nRuntimeException extends \RuntimeException {}
 
 // Endfile

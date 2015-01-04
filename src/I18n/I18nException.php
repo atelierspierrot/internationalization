@@ -21,9 +21,8 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n;
-use \Exception;
-class I18nException extends Exception {}
+
+class I18nException extends \Exception {}
 
 // Endfile

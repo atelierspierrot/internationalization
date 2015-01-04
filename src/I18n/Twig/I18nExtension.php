@@ -37,11 +37,14 @@ class I18nExtension
     extends Twig_Extension
 {
 
+    /**
+     * @var \I18n\I18n
+     */
     protected $i18n;
 
     /**
-     * You can construct this extension by passing a `I18n\I18n` object instance or just
-     * a `I18n\Loader` object ar just an array of options.
+     * You can construct this extension by passing a `\I18n\I18n` object instance or just
+     * a `\I18n\LoaderInterface` object or just an array of options.
      */
     public function __construct($arg)
     {
@@ -50,9 +53,9 @@ class I18nExtension
         } elseif (is_array($arg)) {
             $loader = new Loader($args);
             I18n::getInstance($loader);
-        } elseif (!$arg instanceof I18n) {
+        } elseif (!($arg instanceof I18n)) {
             throw new InvalidArgumentException(
-                sprintf('The %s class must receive a I18n\I18n or I18n\Loader instance (received "%s")!', __CLASS__, gettype($arg))
+                sprintf('The %s class must receive a I18n\I18n or I18n\LoaderInterface instance (received "%s")!', __CLASS__, gettype($arg))
             );
         }
     }
