@@ -76,7 +76,7 @@
         <abbr title="Patterns\Interfaces\TranslatableInterface">TranslatableInterface</abbr></p>
 
             <div class="description">
-            <p>Internationalization class</p>            <p>For more informations, see:
+            <p>Internationalization class</p>            <p>For more information, see:
 -   <a href="http://www.unicode.org/reports/tr35/">http://www.unicode.org/reports/tr35/</a>
 -   <a href="http://userguide.icu-project.org/locale">http://userguide.icu-project.org/locale</a>
 -   <a href="http://userguide.icu-project.org/formatparse/datetime">http://userguide.icu-project.org/formatparse/datetime</a>
@@ -93,17 +93,26 @@
                     <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setLoader">setLoader</a>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader)
+                    <a href="#method_setLoader">setLoader</a>(<a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a> $loader)
                                             <p>Store the loader</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a>
+                    <a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLoader">getLoader</a>()
                                             <p>Gets the loader</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_loadFile">loadFile</a>(string $file_name, null|string $dir_name = null)
+                                            <p>Load a new language file</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -126,7 +135,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    void
+                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setDefaultFromHttp">setDefaultFromHttp</a>()
@@ -402,9 +411,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_setLoader">
-        <div class="location">at line 191</div>
+        <div class="location">at line 213</div>
         <code>                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
-    <strong>setLoader</strong>(<a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a> $loader)</code>
+    <strong>setLoader</strong>(<a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a> $loader)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
@@ -414,7 +423,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a></td>
+                <td><a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a></td>
                 <td>$loader</td>
                 <td>
 </td>
@@ -440,8 +449,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLoader">
-        <div class="location">at line 202</div>
-        <code>                    <a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a>
+        <div class="location">at line 224</div>
+        <code>                    <a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a>
     <strong>getLoader</strong>()</code>
     </h3>
     <div class="details">
@@ -453,7 +462,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../I18n/Loader.html"><abbr title="I18n\Loader">Loader</abbr></a></td>
+            <td><a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -466,8 +475,57 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_loadFile">
+        <div class="location">at line 236</div>
+        <code>                    
+    <strong>loadFile</strong>(string $file_name, null|string $dir_name = null)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Load a new language file</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$file_name</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>null|string</td>
+                <td>$dir_name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../I18n/I18nException.html"><abbr title="I18n\I18nException">I18nException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="http://php.net/Exception"><abbr title="Exception">Exception</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setLanguage">
-        <div class="location">at line 218</div>
+        <div class="location">at line 274</div>
         <code>                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
     <strong>setLanguage</strong>(string $lang, bool $throw_errors = true, bool $force_rebuild = false)</code>
     </h3>
@@ -522,7 +580,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLanguage">
-        <div class="location">at line 238</div>
+        <div class="location">at line 294</div>
         <code>                    string
     <strong>getLanguage</strong>()</code>
     </h3>
@@ -548,8 +606,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setDefaultFromHttp">
-        <div class="location">at line 248</div>
-        <code>                    void
+        <div class="location">at line 304</div>
+        <code>                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
     <strong>setDefaultFromHttp</strong>()</code>
     </h3>
     <div class="details">
@@ -561,7 +619,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>void</td>
+            <td><a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -575,7 +633,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isAvailableLanguage">
-        <div class="location">at line 262</div>
+        <div class="location">at line 319</div>
         <code>                    bool
     <strong>isAvailableLanguage</strong>(string $lang)</code>
     </h3>
@@ -611,7 +669,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getAvailableLocale">
-        <div class="location">at line 277</div>
+        <div class="location">at line 334</div>
         <code>                    null|string
     <strong>getAvailableLocale</strong>(string $lang)</code>
     </h3>
@@ -648,7 +706,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getAvailableLanguages">
-        <div class="location">at line 293</div>
+        <div class="location">at line 350</div>
         <code>                    array
     <strong>getAvailableLanguages</strong>()</code>
     </h3>
@@ -674,7 +732,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_setLocale">
-        <div class="location">at line 304</div>
+        <div class="location">at line 364</div>
         <code>                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
     <strong>setLocale</strong>(string $locale)</code>
     </h3>
@@ -710,7 +768,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocale">
-        <div class="location">at line 315</div>
+        <div class="location">at line 375</div>
         <code>                    string
     <strong>getLocale</strong>()</code>
     </h3>
@@ -736,7 +794,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_setTimezone">
-        <div class="location">at line 326</div>
+        <div class="location">at line 386</div>
         <code>                    <a href="../I18n/I18n.html"><abbr title="I18n\I18n">I18n</abbr></a>
     <strong>setTimezone</strong>(string $timezone)</code>
     </h3>
@@ -773,7 +831,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getTimezone">
-        <div class="location">at line 338</div>
+        <div class="location">at line 398</div>
         <code>                    string
     <strong>getTimezone</strong>()</code>
     </h3>
@@ -799,7 +857,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_hasLocalizedString">
-        <div class="location">at line 349</div>
+        <div class="location">at line 409</div>
         <code>                    bool
     <strong>hasLocalizedString</strong>(string $index)</code>
     </h3>
@@ -835,7 +893,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocalizedString">
-        <div class="location">at line 360</div>
+        <div class="location">at line 420</div>
         <code>                    string
     <strong>getLocalizedString</strong>(string $index)</code>
     </h3>
@@ -871,7 +929,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_parseString">
-        <div class="location">at line 373</div>
+        <div class="location">at line 433</div>
         <code>                    string
     <strong>parseString</strong>(string $str, array $arguments = null)</code>
     </h3>
@@ -913,7 +971,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_parseStringMetadata">
-        <div class="location">at line 393</div>
+        <div class="location">at line 453</div>
         <code>                    array
     <strong>parseStringMetadata</strong>(string $str)</code>
     </h3>
@@ -950,7 +1008,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getCurrency">
-        <div class="location">at line 442</div>
+        <div class="location">at line 502</div>
         <code>                    string
     <strong>getCurrency</strong>(string $lang = null)</code>
     </h3>
@@ -986,7 +1044,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getHttpHeaderLocale">
-        <div class="location">at line 461</div>
+        <div class="location">at line 521</div>
         <code>                    string
     <strong>getHttpHeaderLocale</strong>()</code>
     </h3>
@@ -1012,7 +1070,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getAvailableLanguagesNames">
-        <div class="location">at line 473</div>
+        <div class="location">at line 533</div>
         <code>                    array
     <strong>getAvailableLanguagesNames</strong>(string $lang = null)</code>
     </h3>
@@ -1049,7 +1107,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLanguageCode">
-        <div class="location">at line 498</div>
+        <div class="location">at line 558</div>
         <code>                    string
     <strong>getLanguageCode</strong>(string $lang = null)</code>
     </h3>
@@ -1085,7 +1143,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getRegionCode">
-        <div class="location">at line 510</div>
+        <div class="location">at line 570</div>
         <code>                    string
     <strong>getRegionCode</strong>(string $lang = null)</code>
     </h3>
@@ -1121,7 +1179,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getScriptCode">
-        <div class="location">at line 521</div>
+        <div class="location">at line 581</div>
         <code>                    string
     <strong>getScriptCode</strong>(string $lang = null)</code>
     </h3>
@@ -1157,7 +1215,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getKeywords">
-        <div class="location">at line 532</div>
+        <div class="location">at line 592</div>
         <code>                    array
     <strong>getKeywords</strong>(string $lang = null)</code>
     </h3>
@@ -1193,7 +1251,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getKeyword">
-        <div class="location">at line 544</div>
+        <div class="location">at line 604</div>
         <code>                    null|string
     <strong>getKeyword</strong>(string $keyword, string $lang = null)</code>
     </h3>
@@ -1234,7 +1292,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getPrimaryLanguage">
-        <div class="location">at line 557</div>
+        <div class="location">at line 617</div>
         <code>                    string
     <strong>getPrimaryLanguage</strong>(string $for_locale = null, string $lang = null)</code>
     </h3>
@@ -1275,7 +1333,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLanguageName">
-        <div class="location">at line 569</div>
+        <div class="location">at line 629</div>
         <code>                    string
     <strong>getLanguageName</strong>(string $for_locale = null, string $lang = null)</code>
     </h3>
@@ -1316,7 +1374,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getCountryName">
-        <div class="location">at line 581</div>
+        <div class="location">at line 641</div>
         <code>                    string
     <strong>getCountryName</strong>(string $for_locale = null, string $lang = null)</code>
     </h3>
@@ -1357,7 +1415,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocaleScript">
-        <div class="location">at line 593</div>
+        <div class="location">at line 653</div>
         <code>                    string
     <strong>getLocaleScript</strong>(string $for_locale = null, string $lang = null)</code>
     </h3>
@@ -1398,7 +1456,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocaleVariant">
-        <div class="location">at line 605</div>
+        <div class="location">at line 665</div>
         <code>                    string
     <strong>getLocaleVariant</strong>(string $for_locale = null, string $lang = null)</code>
     </h3>
@@ -1439,7 +1497,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocalizedNumberString">
-        <div class="location">at line 649</div>
+        <div class="location">at line 709</div>
         <code>        static            string
     <strong>getLocalizedNumberString</strong>(int $number, string $lang = null)</code>
     </h3>
@@ -1493,7 +1551,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocalizedPriceString">
-        <div class="location">at line 675</div>
+        <div class="location">at line 735</div>
         <code>        static            string
     <strong>getLocalizedPriceString</strong>(int $number, string $lang = null)</code>
     </h3>
@@ -1547,7 +1605,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLocalizedDateString">
-        <div class="location">at line 704</div>
+        <div class="location">at line 764</div>
         <code>        static            string
     <strong>getLocalizedDateString</strong>(<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $date, string $mask = null, string $charset = &#039;UTF-8&#039;, string $lang = null)</code>
     </h3>
@@ -1612,7 +1670,7 @@ locale string corresponding to a language code.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_translate">
-        <div class="location">at line 754</div>
+        <div class="location">at line 814</div>
         <code>        static            string
     <strong>translate</strong>(string $index, array $args = null, string $lang = null)</code>
     </h3>
@@ -1675,7 +1733,7 @@ the corresponding localized translated string.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_pluralize">
-        <div class="location">at line 796</div>
+        <div class="location">at line 856</div>
         <code>        static            string
     <strong>pluralize</strong>(array $indexes = array(), int $number, array $args = null, string $lang = null)</code>
     </h3>

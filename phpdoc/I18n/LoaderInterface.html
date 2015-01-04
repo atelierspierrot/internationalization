@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>I18n\Loader | Internationalization</title>
+    <title>I18n\LoaderInterface | Internationalization</title>
 
             <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
@@ -16,7 +16,7 @@
     
     </head>
 
-    <body id="class" data-name="class:I18n_Loader" data-root-path="../">
+    <body id="class" data-name="class:I18n_LoaderInterface" data-root-path="../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -59,67 +59,35 @@
 
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
-                <li><span class="label label-default">class</span></li>
+                <li><span class="label label-default">interface</span></li>
                                                             <li><a href="../I18n.html">I18n</a></li>
     
-                <li>Loader</li>
+                <li>LoaderInterface</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Loader</h1>
+        <h1>LoaderInterface</h1>
     </div>
 
-    <p>    class
-    <strong>Loader</strong>        extends <abbr title="Patterns\Abstracts\AbstractOptionable">AbstractOptionable</abbr>        implements
-        <a href="../I18n/LoaderInterface.html"><abbr title="I18n\LoaderInterface">LoaderInterface</abbr></a></p>
+    <p>    interface
+    <strong>LoaderInterface</strong></p>
 
     
     
     
-            <h2>Properties</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td class="type" id="property_defaults">
-                    static                                                            
-                </td>
-                <td>$defaults</td>
-                <td class="last">The default options</td>
-                <td></td>
-            </tr>
-            </table>
-
     
             <h2>Methods</h2>
 
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    array
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(array $user_options = array())
-                                            <p>Creation of a Loader with an optional user defined set of options</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    <abbr title="I18n\$this">$this</abbr>
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_addPath">addPath</a>(null|string $db_filename = null, null|string $db_directory = null, null|string $file = null)
-                                            <p>Add a path to the registry</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getParsedOption">getParsedOption</a>(string $name, string|array $lang = null, mixed $default = null)
-                                            <p>Parse an option value replacing <code>%s</code> by the actual language code</p>                </div>
+                    <a href="#method_getOption">getOption</a>(string $name, mixed $default = null)
+                                            <p>Get the value of a specific option</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -182,7 +150,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_buildLanguageDBFilePath">buildLanguageDBFilePath</a>()
-                                            <p>Build the file path for the language CSV database</p>                </div>
+                                            <p>Build the absolute file path for the language CSV database</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -191,7 +159,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_findLanguageDBFile">findLanguageDBFile</a>(string $db_filename = null, string $db_directory = null)
-                                            <p>Find (and add if needed) a language file from options directories</p>                </div>
+                                            <p>Find a language file from options directories</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -201,91 +169,14 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method___construct">
-        <div class="location">at line 77</div>
-        <code>                    
-    <strong>__construct</strong>(array $user_options = array())</code>
+                    <h3 id="method_getOption">
+        <div class="location">at line 39</div>
+        <code>                    array
+    <strong>getOption</strong>(string $name, mixed $default = null)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Creation of a Loader with an optional user defined set of options</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>array</td>
-                <td>$user_options</td>
-                <td>An array of options values to over-write defaults</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_addPath">
-        <div class="location">at line 89</div>
-        <code>                    <abbr title="I18n\$this">$this</abbr>
-    <strong>addPath</strong>(null|string $db_filename = null, null|string $db_directory = null, null|string $file = null)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Add a path to the registry</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>null|string</td>
-                <td>$db_filename</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>null|string</td>
-                <td>$db_directory</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>null|string</td>
-                <td>$file</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="I18n\$this">$this</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getParsedOption">
-        <div class="location">at line 112</div>
-        <code>                    mixed
-    <strong>getParsedOption</strong>(string $name, string|array $lang = null, mixed $default = null)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Parse an option value replacing <code>%s</code> by the actual language code</p>                                </div>
+                                    <p>Get the value of a specific option</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -293,18 +184,12 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>The option name</td>
-            </tr>
-                    <tr>
-                <td>string|array</td>
-                <td>$lang</td>
-                <td>The language code to use or an array to pass to
-         the 'sprintf()' method</td>
+                <td>The index of the option to get</td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$default</td>
-                <td>The value to return if the option can't be found</td>
+                <td>The default value to return if the option is not defined</td>
             </tr>
             </table>
 
@@ -313,8 +198,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>mixed</td>
-            <td>The value of the option if found, with replacement if so</td>
+            <td>array</td>
+            <td>The current option's value if defined, <code>$default</code> otherwise</td>
         </tr>
     </table>
 
@@ -326,7 +211,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageFileName">
-        <div class="location">at line 141</div>
+        <div class="location">at line 48</div>
         <code>                    string
     <strong>buildLanguageFileName</strong>(string $lang, string $db_filename = null)</code>
     </h3>
@@ -367,7 +252,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageDirName">
-        <div class="location">at line 156</div>
+        <div class="location">at line 56</div>
         <code>                    string
     <strong>buildLanguageDirName</strong>(string $lang)</code>
     </h3>
@@ -403,7 +288,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageFilePath">
-        <div class="location">at line 167</div>
+        <div class="location">at line 64</div>
         <code>                    string
     <strong>buildLanguageFilePath</strong>(string $lang)</code>
     </h3>
@@ -439,7 +324,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageVarname">
-        <div class="location">at line 178</div>
+        <div class="location">at line 72</div>
         <code>                    string
     <strong>buildLanguageVarname</strong>(string $lang)</code>
     </h3>
@@ -475,7 +360,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageDBFileName">
-        <div class="location">at line 188</div>
+        <div class="location">at line 79</div>
         <code>                    string
     <strong>buildLanguageDBFileName</strong>()</code>
     </h3>
@@ -502,7 +387,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageDBDirName">
-        <div class="location">at line 198</div>
+        <div class="location">at line 86</div>
         <code>                    string
     <strong>buildLanguageDBDirName</strong>()</code>
     </h3>
@@ -529,13 +414,13 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildLanguageDBFilePath">
-        <div class="location">at line 208</div>
+        <div class="location">at line 93</div>
         <code>                    string
     <strong>buildLanguageDBFilePath</strong>()</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Build the file path for the language CSV database</p>                                </div>
+                                    <p>Build the absolute file path for the language CSV database</p>                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -556,13 +441,13 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_findLanguageDBFile">
-        <div class="location">at line 220</div>
+        <div class="location">at line 102</div>
         <code>                    null|string
     <strong>findLanguageDBFile</strong>(string $db_filename = null, string $db_directory = null)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Find (and add if needed) a language file from options directories</p>                                </div>
+                                    <p>Find a language file from options directories</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
