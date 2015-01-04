@@ -1,7 +1,7 @@
 Internationalization
 ====================
 
-A PHP package to manage i18n: translations, pluralizations, date and number formating according to 
+A PHP package to manage i18n: translations, pluralization, date and number formatting according to 
 a localization.
 
 
@@ -23,7 +23,7 @@ The whole package is embedded in the `I18n` namespace.
 You can use this package in your work in many ways.
 
 First, you can clone the [GitHub](https://github.com/atelierspierrot/internationalization) repository
-and include it "as is" in your poject:
+and include it "as is" in your project:
 
     https://github.com/atelierspierrot/internationalization
 
@@ -31,7 +31,7 @@ You can also download an [archive](https://github.com/atelierspierrot/internatio
 from Github.
 
 Then, to use the package classes, you just need to register the `I18n` namespace directory
-using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
+using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom *autoloader*:
 
     require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
     $classLoader = new SplClassLoader('I18n', '/path/to/package/src');
@@ -45,7 +45,7 @@ in your `composer.json`:
         "atelierspierrot/internationalization": "dev-master"
     }
 
-The namespace will be automatically added to the project Composer autoloader.
+The namespace will be automatically added to the project Composer's *autoloader*.
 
 
 ## Usage
@@ -70,7 +70,7 @@ To create a new I18n instance, you need to pass it a `I18n\Loader` object:
 
         // this is the tag construction used for replacements in strings
         // by default, "%arg%" will be replacement by the argument "arg" value
-        // as this will be passed thru a 'sprintf' PHP function, literal percent is written '%%'
+        // as this will be passed to a 'sprintf' PHP function, literal percent is written '%%'
         'arg_wrapper_mask' => "%%%s%%",
     ));
 
@@ -122,6 +122,14 @@ defined as a PHP array like:
 This may be defined in a file called `i18n.CODE.php` where `CODE` is the two letter reference
 of the language. These files will be searched and loaded from the `language_directory` loader
 option value.
+
+### Load multiple language files
+
+The I18n object is designed to be able to load multiple language files easily with:
+
+    $i18n->loadFile( my file path )
+
+Each file loaded is stored in the internal cache system of the object (a simple PHP array).
 
 ### Package aliases
 
