@@ -1,6 +1,7 @@
 Internationalization
 ====================
 
+[![documentation](http://img.ateliers-pierrot-static.fr/readthe-doc.png)](http://docs.ateliers-pierrot.fr/internationalization/)
 A PHP package to manage i18n: translations, pluralization, date and number formatting according to 
 a localization.
 
