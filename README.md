@@ -44,7 +44,7 @@ in your `composer.json`:
 
 ```json
 "require": {
-    ...
+    "your/deps": "*",
     "atelierspierrot/internationalization": "dev-master"
 }
 ```
@@ -88,10 +88,13 @@ For a full list of possible Loader options, please have a look in source code.
 Any option value defining a directory path or a filename construction can contains a `%s`
 tag that will be replaced by the current language.
 
-    For instance:
-        'language_directory' => __DIR__.'/i18n/%s'
-    will render, for the EN language:
-        'language_directory' => __DIR__.'/i18n/EN'
+```php
+// for instance:
+'language_directory' => __DIR__.'/i18n/%s'
+
+// will render, for the EN language:
+'language_directory' => __DIR__.'/i18n/EN'
+```
 
 As you can see, the I18n class is defined as a Singleton object: any future call of 
 `\I18n\I18n::getInstance()` will refer to the first created object instance.
@@ -190,14 +193,14 @@ The latest version of this documentation is available online at <http://docs.ate
 
 >    http://github.com/atelierspierrot/internationalization
 
->    Copyleft (ↄ) 2010-2015, Pierre Cassat and contributors
+>    Copyright (c) 2010-2015, Pierre Cassat and contributors
 
->    Licensed under the GPL Version 3 license.
+>    Licensed under the Apache 2.0 license.
 
->    http://opensource.org/licenses/GPL-3.0
+>    http://www.apache.org/licenses/LICENSE-2.0
 
 >    ----
 
 >    Les Ateliers Pierrot - Paris, France
 
->    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+>    <http://www.ateliers-pierrot.fr/> - <contact@ateliers-pierrot.fr>
