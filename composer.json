@@ -4,7 +4,7 @@
     "description": "A PHP package to manage i18n: translations, pluralization and date formats according to a localization.",
     "keywords": [ "i18n", "internationalization", "localization" ],
     "homepage": "http://github.com/atelierspierrot/internationalization",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
         "email": "contact@ateliers-pierrot.fr",
