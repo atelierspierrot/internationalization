@@ -1,58 +1,14 @@
 Internationalization
 ====================
 
+[![demonstration](http://img.ateliers-pierrot-static.fr/see-the-demo.svg)](http://sites.ateliers-pierrot.fr/internationalization/)
+[![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/internationalization/)
 A PHP package to manage i18n: translations, pluralization, date and number formatting according to 
 a localization.
 
 
-## How-to
-
-As for all our work, we try to follow the coding standards and naming rules most commonly in use:
-
--   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
--   the [PHP Framework Interoperability Group standards](https://github.com/php-fig/fig-standards).
-
-Knowing that, all classes are named and organized in an architecture to allow the use of the
-[standard SplClassLoader](https://gist.github.com/jwage/221634).
-
-The whole package is embedded in the `I18n` namespace.
-
-
-## Installation
-
-You can use this package in your work in many ways.
-
-First, you can clone the [GitHub](https://github.com/atelierspierrot/internationalization) repository
-and include it "as is" in your project:
-
-    https://github.com/atelierspierrot/internationalization
-
-You can also download an [archive](https://github.com/atelierspierrot/internationalization/downloads)
-from Github.
-
-Then, to use the package classes, you just need to register the `I18n` namespace directory
-using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom *autoloader*:
-
-```php
-require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-$classLoader = new SplClassLoader('I18n', '/path/to/package/src');
-$classLoader->register();
-```
-
-If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
-in your `composer.json`:
-
-```json
-"require": {
-    "your/deps": "*",
-    "atelierspierrot/internationalization": "dev-master"
-}
-```
-
-The namespace will be automatically added to the project Composer's *autoloader*.
-
-
-## Usage
+Usage
+-----
 
 ### Object creation and PHP usage
 
@@ -168,26 +124,35 @@ function datify(...) = $i18n->getLocalizedDateString(...)
 ```
 
 
-## Extensions
+Extensions
+----------
 
 The package embeds an extension to use the class in [the Twig template engine](http://twig.sensiolabs.org/).
 See the [Twig Extension page](TwigExtension.md) for more infos.
 
 
-## Development
+Installation
+------------
 
-To install all PHP packages for development, just run:
+For a complete information about how to install this package and load its namespace, 
+please have a look at [our *USAGE* documentation](http://github.com/atelierspierrot/atelierspierrot/blob/master/USAGE.md).
 
-    ~$ composer install --dev
+If you are a [Composer](http://getcomposer.org/) user, just add the package to the 
+requirements of your project's `composer.json` manifest file:
 
-A documentation can be generated with [Sami](https://github.com/fabpot/Sami) running:
+```json
+"atelierspierrot/internationalization": "@stable"
+```
 
-    ~$ php vendor/sami/sami/sami.php render sami.config.php
+You can use a specific release or the latest release of a major version using the appropriate
+[version constraint](http://getcomposer.org/doc/01-basic-usage.md#package-versions).
 
-The latest version of this documentation is available online at <http://docs.ateliers-pierrot.fr/internationalization/>.
+Please note that this package depends on the externals [PHP Patterns](http://github.com/atelierspierrot/patterns)
+and [PHP Library](http://github.com/atelierspierrot/library).
 
 
-## Author & License
+Author & License
+----------------
 
 >    Internationalization
 

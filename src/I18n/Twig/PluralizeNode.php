@@ -20,7 +20,6 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n\Twig;
 
 use \Twig_Node;
@@ -30,6 +29,9 @@ use \Twig_Compiler;
 use \Twig_Node_Expression_Constant;
 use \Twig_Node_Expression_Array;
 
+/**
+ * @author  piwi <me@e-piwi.fr>
+ */
 class PluralizeNode
     extends Twig_Node
 {

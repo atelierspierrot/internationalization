@@ -26,7 +26,7 @@ namespace I18n\Generator;
 use \I18n\GeneratorInterface;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Csv
     implements GeneratorInterface
