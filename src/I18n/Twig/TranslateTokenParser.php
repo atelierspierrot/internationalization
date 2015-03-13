@@ -20,7 +20,6 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n\Twig;
 
 use \Twig_TokenParser;
@@ -57,6 +56,8 @@ use \I18n\Twig\TranslateNode;
  *
  * {% translate { 'arg1': "value1", 'arg2': 567 } "your string index" %}
  * </pre>
+ *
+ * @author  piwi <me@e-piwi.fr>
  */
 class TranslateTokenParser
     extends Twig_TokenParser

@@ -20,7 +20,6 @@
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
-
 namespace I18n\Twig;
 
 use \InvalidArgumentException;
@@ -32,6 +31,9 @@ use \I18n\Loader;
 use \I18n\Twig\TranslateTokenParser;
 use \I18n\Twig\PluralizeTokenParser;
 
+/**
+ * @author  piwi <me@e-piwi.fr>
+ */
 class I18nExtension
     extends Twig_Extension
 {

@@ -26,7 +26,7 @@ use \Patterns\Abstracts\AbstractOptionable;
 use \Library\Helper\Directory as DirectoryHelper;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Loader
     extends AbstractOptionable

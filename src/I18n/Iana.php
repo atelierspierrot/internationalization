@@ -32,7 +32,7 @@ use \Library\Helper\Directory as DirectoryHelper;
  *
  *     <language code>_<script code>_<country code>_<variant code>@keyword1:value;keyword2:value
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Iana
 {

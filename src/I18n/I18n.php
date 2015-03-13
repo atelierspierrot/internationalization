@@ -38,7 +38,7 @@ use \Patterns\Interfaces\TranslatableInterface;
  * -   <http://userguide.icu-project.org/formatparse/datetime>
  * -   <http://www.php.net/manual/en/book.intl.php>
  *
- * @author      Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class I18n
     extends AbstractSingleton
