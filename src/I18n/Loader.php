@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ class Loader
      */
     public function __construct(array $user_options = array())
     {
-        $this->setOptions( array_merge(self::$defaults, $user_options) );
+        $this->setOptions(array_merge(self::$defaults, $user_options));
     }
 
     /**
@@ -241,7 +241,4 @@ class Loader
         $this->addPath($db_filename, $db_directory, $_file);
         return $_file;
     }
-
 }
-
-// Endfile

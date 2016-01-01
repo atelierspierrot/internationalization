@@ -22,11 +22,17 @@
         "twig/twig": "1.*",
         "twig/extensions": "dev-master",
         "sami/sami": "@stable",
+        "fabpot/php-cs-fixer": "@stable",
         "phpmd/phpmd" : "@stable"
     },
     "autoload": { 
-        "psr-0": {  "I18n": "src" },
+        "psr-4": {  "I18n\\": "src/I18n/" },
         "files": [ "src/I18n/aliases.php" ]
+    },
+    "scripts": {
+        "build-doc": "php vendor/bin/sami.php update .sami.php",
+        "update-doc": "php vendor/bin/sami.php update .sami.php",
+        "cs-fixer": "php vendor/bin/php-cs-fixer fix -v"
     },
     "extra": {
         "views-functions": "src/I18n/aliases.php",

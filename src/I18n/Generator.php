@@ -2,21 +2,21 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
- * 
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * The source code of this package is available online at 
+ * The source code of this package is available online at
  * <http://github.com/atelierspierrot/internationalization>.
  */
 
@@ -45,7 +45,7 @@ class Generator
      */
     public function __construct($db_filepath = null, $generator = 'csv')
     {
-        if (!empty($db_filepath)){
+        if (!empty($db_filepath)) {
             $this->setDbFilepath($db_filepath);
         }
         if (!empty($generator)) {
@@ -114,7 +114,7 @@ class Generator
         $i18n   = I18n::getInstance();
         if (@file_exists($_f)) {
             $all_lang_strings = $this->getGenerator()->generate($_f, $i18n);
-            foreach($all_lang_strings as $lang=>$strings) {
+            foreach ($all_lang_strings as $lang=>$strings) {
                 $_lf = $i18n->getLoader()->buildLanguageFilePath($lang);
                 $dir = dirname($_lf);
                 if (!file_exists($dir)) {
@@ -126,7 +126,7 @@ class Generator
                     }
                 }
                 $_lv = $i18n->getLoader()->buildLanguageVarname($lang);
-                $_lctt = '<'.'?'.'php'."\n".'$'.$_lv.'='.var_export($strings,true).';'."\n".'?'.'>';
+                $_lctt = '<'.'?'.'php'."\n".'$'.$_lv.'='.var_export($strings, true).';'."\n".'?'.'>';
                 $ok = file_put_contents($_lf, $_lctt);
                 if (false===$ok) {
                     throw new I18nRuntimeException(
@@ -141,7 +141,4 @@ class Generator
         }
         return $ok;
     }
-
 }
-
-// Endfile

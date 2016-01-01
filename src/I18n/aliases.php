@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@
  * Common functions aliases
  */
 
-if (!function_exists('_T')) 
-{
+if (!function_exists('_T')) {
     /**
      * Process a translation with arguments
      * @see     \I18n\I18n::translate()
@@ -37,8 +36,7 @@ if (!function_exists('_T'))
     }
 }
 
-if (!function_exists('translate')) 
-{
+if (!function_exists('translate')) {
     /**
      * Process a translation with arguments
      * @see     \I18n\I18n::translate()
@@ -49,8 +47,7 @@ if (!function_exists('translate'))
     }
 }
 
-if (!function_exists('_P')) 
-{
+if (!function_exists('_P')) {
     /**
      * Process a translation with arguments depending on a counter
      * @see     \I18n\I18n::pluralize()
@@ -61,8 +58,7 @@ if (!function_exists('_P'))
     }
 }
 
-if (!function_exists('pluralize')) 
-{
+if (!function_exists('pluralize')) {
     /**
      * Process a translation with arguments depending on a counter
      * @see     \I18n\I18n::pluralize()
@@ -73,8 +69,7 @@ if (!function_exists('pluralize'))
     }
 }
 
-if (!function_exists('_D')) 
-{
+if (!function_exists('_D')) {
     /**
      * Get a localized date value
      * @see     \I18n\I18n::getLocalizedDateString()
@@ -85,8 +80,7 @@ if (!function_exists('_D'))
     }
 }
 
-if (!function_exists('datify')) 
-{
+if (!function_exists('datify')) {
     /**
      * Get a localized date value
      * @see     \I18n\I18n::getLocalizedDateString()
@@ -97,8 +91,7 @@ if (!function_exists('datify'))
     }
 }
 
-if (!function_exists('_N')) 
-{
+if (!function_exists('_N')) {
     /**
      * Get a localized number value
      * @see     \I18n\I18n::getLocalizedNumberString()
@@ -109,8 +102,7 @@ if (!function_exists('_N'))
     }
 }
 
-if (!function_exists('numberify')) 
-{
+if (!function_exists('numberify')) {
     /**
      * Get a localized number value
      * @see     \I18n\I18n::getLocalizedNumberString()
@@ -121,8 +113,7 @@ if (!function_exists('numberify'))
     }
 }
 
-if (!function_exists('_C')) 
-{
+if (!function_exists('_C')) {
     /**
      * Get a localized price value
      * @see     \I18n\I18n::getLocalizedPriceString()
@@ -133,8 +124,7 @@ if (!function_exists('_C'))
     }
 }
 
-if (!function_exists('currencify')) 
-{
+if (!function_exists('currencify')) {
     /**
      * Get a localized price value
      * @see     \I18n\I18n::getLocalizedPriceString()
@@ -145,8 +135,7 @@ if (!function_exists('currencify'))
     }
 }
 
-if (!function_exists('getlocale')) 
-{
+if (!function_exists('getlocale')) {
     /**
      * Get current locale in use
      * @see     \Locale::getDefault()
@@ -156,5 +145,3 @@ if (!function_exists('getlocale'))
         return \Locale::getDefault();
     }
 }
-
-// Endfile

@@ -160,7 +160,7 @@ Author & License
 
 >    http://github.com/atelierspierrot/internationalization
 
->    Copyright (c) 2010-2015, Pierre Cassat and contributors
+>    Copyright (c) 2010-2016, Pierre Cassat and contributors
 
 >    Licensed under the Apache 2.0 license.
 
