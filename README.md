@@ -3,6 +3,8 @@ Internationalization
 
 [![demonstration](http://img.ateliers-pierrot-static.fr/see-the-demo.svg)](http://sites.ateliers-pierrot.fr/internationalization/)
 [![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/internationalization/)
+[![Code Climate](http://codeclimate.com/github/atelierspierrot/internationalization/badges/gpa.svg)](http://codeclimate.com/github/atelierspierrot/internationalization)
+
 A PHP package to manage i18n: translations, pluralization, date and number formatting according to 
 a localization.
 
@@ -158,7 +160,7 @@ Author & License
 
 >    http://github.com/atelierspierrot/internationalization
 
->    Copyright (c) 2010-2015, Pierre Cassat and contributors
+>    Copyright (c) 2010-2016, Pierre Cassat and contributors
 
 >    Licensed under the Apache 2.0 license.
 

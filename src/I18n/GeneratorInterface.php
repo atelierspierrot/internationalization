@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,4 @@ interface GeneratorInterface
      * @param \I18n\I18n $i18n The I18n instance
      */
     public function generate($from_file, \I18n\I18n $i18n);
-
 }
-
-// Endfile

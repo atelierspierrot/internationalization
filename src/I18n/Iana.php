@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,12 @@ class Iana
 
     public function __construct($db_file = null, $db_dir = null)
     {
-        if (!empty($db_file)) $this->setDbFilename($db_file);
-        if (!empty($db_dir)) $this->setDbFilepath($db_dir);
+        if (!empty($db_file)) {
+            $this->setDbFilename($db_file);
+        }
+        if (!empty($db_dir)) {
+            $this->setDbFilepath($db_dir);
+        }
     }
 
     public function setDbFilepath($path)
@@ -110,11 +114,11 @@ class Iana
         $db_content = file_get_contents($from_file);
         $parts = explode('%%', $db_content);
         $db = array();
-        foreach($parts as $i=>$block) {
+        foreach ($parts as $i=>$block) {
             $block_parts = explode("\n", $block);
             $type = null;
             $subtag = array();
-            foreach($block_parts as $j=>$lineblock) {
+            foreach ($block_parts as $j=>$lineblock) {
                 if (false!==strpos($lineblock, ':')) {
                     $items = explode(':', $lineblock);
                     $index = strtolower($items[0]);
@@ -146,7 +150,7 @@ class Iana
 
 
         $php_def = '<'.'?php'."\n".'define(\'I18N_LOCALES_IANADB\', serialize('."\n";
-        $php_def .= var_export($db,true);
+        $php_def .= var_export($db, true);
         $php_def .= "\n".'));'."\n".'?'.'>';
         if (false===file_put_contents($this->getDbRealpath(), $php_def, LOCK_EX)) {
             throw new \RuntimeException(
@@ -164,7 +168,9 @@ class Iana
     public function read()
     {
         $db_file = $this->getDbRealpath();
-        if (!file_exists($db_file)) $this->update();
+        if (!file_exists($db_file)) {
+            $this->update();
+        }
         include $db_file;
         $this->locales_db = unserialize(I18N_LOCALES_IANADB);
     }
@@ -181,7 +187,7 @@ class Iana
     {
         $db = $this->getDb();
         $languages = array();
-        foreach($db['language'] as $item) {
+        foreach ($db['language'] as $item) {
             if (!isset($item['preferred-value']) && (
                 !isset($item['scope']) || $item['scope']!=='macrolanguage'
             )) {
@@ -195,7 +201,7 @@ class Iana
     {
         $db = $this->getDb();
         $regions = array();
-        foreach($db['region'] as $item) {
+        foreach ($db['region'] as $item) {
             if (!isset($item['preferred-value']) && (
                 !isset($item['scope']) || $item['scope']!=='macrolanguage'
             )) {
@@ -209,7 +215,7 @@ class Iana
     {
         $db = $this->getDb();
         $scripts = array();
-        foreach($db['script'] as $item) {
+        foreach ($db['script'] as $item) {
             if (!isset($item['preferred-value']) && (
                 !isset($item['scope']) || $item['scope']!=='macrolanguage'
             )) {
@@ -223,7 +229,7 @@ class Iana
     {
         $db = $this->getDb();
         $extlangs = array();
-        foreach($db['extlang'] as $item) {
+        foreach ($db['extlang'] as $item) {
             if (!isset($item['preferred-value']) && (
                 !isset($item['scope']) || $item['scope']!=='macrolanguage'
             )) {
@@ -232,7 +238,4 @@ class Iana
         }
         return $extlangs;
     }
-
 }
-
-// Endfile

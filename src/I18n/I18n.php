@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,8 +112,8 @@ class I18n
 
         if (empty($this->language_strings)) {
             $this->setLanguage(
-                $this->getLoader()->getOption('default_language', 'en'), 
-                false, 
+                $this->getLoader()->getOption('default_language', 'en'),
+                false,
                 $this->getLoader()->getOption('force_rebuild')
             );
         }
@@ -275,10 +275,10 @@ class I18n
         if ($this->isAvailableLanguage($lang)) {
             $this->lang = $lang;
             $this->setLocale($this->getAvailableLocale($lang));
-            $this->_loadLanguageStrings( $throw_errors, $force_rebuild );
+            $this->_loadLanguageStrings($throw_errors, $force_rebuild);
         } else {
             throw new I18nInvalidArgumentException(
-                sprintf('Language "%s" is not available in the application (available languages are %s)!', 
+                sprintf('Language "%s" is not available in the application (available languages are %s)!',
                     $lang, join(', ', $this->getLoader()->getOption('available_languages')))
             );
         }
@@ -431,9 +431,11 @@ class I18n
      */
     public function parseString($str, array $arguments = null)
     {
-        if (empty($arguments)) return $str;
+        if (empty($arguments)) {
+            return $str;
+        }
         $arg_mask = $this->getLoader()->getOption('arg_wrapper_mask');
-        foreach($arguments as $name=>$value) {
+        foreach ($arguments as $name=>$value) {
             if (is_string($name)) {
                 $str = strtr($str, array( sprintf($arg_mask, $name) => $value));
             } else {
@@ -481,8 +483,8 @@ class I18n
     {
         $arguments = '';
         if (!empty($args)) {
-            foreach($args as $var=>$val) {
-                $arguments .= '"'.$var.'" => '.str_replace(array("\n", "\t"), '', var_export($val,1)).', ';
+            foreach ($args as $var=>$val) {
+                $arguments .= '"'.$var.'" => '.str_replace(array("\n", "\t"), '', var_export($val, 1)).', ';
             }
         }
         return sprintf($this->getLoader()->getOption('show_untranslated_wrapper', '%s'), $str, $arguments);
@@ -502,12 +504,12 @@ class I18n
     {
         if (!is_null($lang)) {
             $original_lang = $this->getLanguage();
-            $this->setLanguage( $lang );
+            $this->setLanguage($lang);
         }
         $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::CURRENCY);
         $currency = $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE);
         if (!empty($original_lang)) {
-            $this->setLanguage( $original_lang );
+            $this->setLanguage($original_lang);
         }
         return $currency;
     }
@@ -533,17 +535,17 @@ class I18n
     {
         if (!is_null($lang)) {
             $original_lang = $this->getLanguage();
-            $this->setLanguage( $lang );
+            $this->setLanguage($lang);
         }
         $db = $this->getLoader()->getOption('available_languages');
         $full_locales = array();
         if (!empty($db)) {
-            foreach($db as $ln=>$locale) {
+            foreach ($db as $ln=>$locale) {
                 $full_locales[$ln] = Locale::getDisplayName($locale);
             }
         }
         if (!empty($original_lang)) {
-            $this->setLanguage( $original_lang );
+            $this->setLanguage($original_lang);
         }
         return $full_locales;
     }
@@ -679,13 +681,13 @@ class I18n
     {
         if (!is_null($lang)) {
             $original_lang = $this->getLanguage();
-            $this->setLanguage( $lang );
+            $this->setLanguage($lang);
         }
         $locale = !is_null($for_locale) ? $this->getAvailableLocale($for_locale) : $this->getLocale();
         $arguments = $do_array ? array($locale, $this->getLocale()) : array($locale);
         $str = call_user_func_array(array('Locale', $fct_name), $arguments);
         if (!empty($original_lang)) {
-            $this->setLanguage( $original_lang );
+            $this->setLanguage($original_lang);
         }
         return $str;
     }
@@ -710,12 +712,12 @@ class I18n
         $_this = self::getInstance();
         if (!is_null($lang)) {
             $original_lang = $_this->getLanguage();
-            $_this->setLanguage( $lang );
+            $_this->setLanguage($lang);
         }
         $formatter = new NumberFormatter($_this->getLocale(), NumberFormatter::DEFAULT_STYLE);
         $str =  $formatter->format($number);
         if (!empty($original_lang)) {
-            $_this->setLanguage( $original_lang );
+            $_this->setLanguage($original_lang);
         }
         return $str;
     }
@@ -736,12 +738,12 @@ class I18n
         $_this = self::getInstance();
         if (!is_null($lang)) {
             $original_lang = $_this->getLanguage();
-            $_this->setLanguage( $lang );
+            $_this->setLanguage($lang);
         }
         $formatter = new NumberFormatter($_this->getLocale(), NumberFormatter::CURRENCY);
         $str = $formatter->format($number);
         if (!empty($original_lang)) {
-            $_this->setLanguage( $original_lang );
+            $_this->setLanguage($original_lang);
         }
         return $str;
     }
@@ -765,15 +767,17 @@ class I18n
         $_this = self::getInstance();
         if (!is_null($lang)) {
             $original_lang = $_this->getLanguage();
-            $_this->setLanguage( $lang );
+            $_this->setLanguage($lang);
         }
 
-        if (is_null($mask)) $mask = $_this->getLocalizedString('datetime_mask_icu');
+        if (is_null($mask)) {
+            $mask = $_this->getLocalizedString('datetime_mask_icu');
+        }
         if (!empty($mask)) {
-            $fmt = new IntlDateFormatter( $_this->getLocale(), IntlDateFormatter::FULL, IntlDateFormatter::FULL,
+            $fmt = new IntlDateFormatter($_this->getLocale(), IntlDateFormatter::FULL, IntlDateFormatter::FULL,
                 $_this->getTimezone(), IntlDateFormatter::GREGORIAN, $mask);
         } else {
-            $fmt = new IntlDateFormatter( $_this->getLocale(), IntlDateFormatter::FULL, IntlDateFormatter::FULL,
+            $fmt = new IntlDateFormatter($_this->getLocale(), IntlDateFormatter::FULL, IntlDateFormatter::FULL,
                 $_this->getTimezone(), IntlDateFormatter::GREGORIAN);
         }
         $str = $fmt->format($date);
@@ -785,7 +789,7 @@ class I18n
         $str = strftime($mask , strtotime($date->format('Y-m-d H:i:s')));
 */
         if (!empty($original_lang)) {
-            $_this->setLanguage( $original_lang );
+            $_this->setLanguage($original_lang);
         }
         return $str;
     }
@@ -815,7 +819,7 @@ class I18n
         $_this = self::getInstance();
         if (!is_null($lang)) {
             $original_lang = $_this->getLanguage();
-            $_this->setLanguage( $lang );
+            $_this->setLanguage($lang);
         }
         if ($_this->hasLocalizedString($index)) {
             $str = $_this->getLocalizedString($index);
@@ -831,7 +835,7 @@ class I18n
             $str = $index;
         }
         if (!empty($original_lang)) {
-            $_this->setLanguage( $original_lang );
+            $_this->setLanguage($original_lang);
         }
         return $str;
     }
@@ -862,7 +866,4 @@ class I18n
         $str = ($number<=1) ? array_shift($indexes) : end($indexes);
         return self::translate($str, $args, $lang);
     }
-
 }
-
-// Endfile

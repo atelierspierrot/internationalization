@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,8 @@ use \Twig_Node_Expression_Name;
 use \Twig_Node_Expression_Constant;
 use \Twig_Node_Expression_Array;
 use \Twig_Error_Syntax;
-use \I18n\I18n, \I18n\Twig\PluralizeNode;
+use \I18n\I18n;
+use \I18n\Twig\PluralizeNode;
 
 /**
  * Use the I18n\I18n::translate function
@@ -74,7 +75,7 @@ class PluralizeTokenParser
             while (!$stream->test(Twig_Token::BLOCK_END_TYPE)) {
                 $args[] = $this->parser->getExpressionParser()->parsePrimaryExpression();
             }
-            foreach($args as $i=>$node) {
+            foreach ($args as $i=>$node) {
                 if ($node instanceof Twig_Node_Expression_Array) {
                     $arguments = $node;
                 } elseif ($node instanceof Twig_Node_Expression_Constant) {
@@ -97,7 +98,6 @@ class PluralizeTokenParser
                 $stream->expect(Twig_Token::BLOCK_END_TYPE);
                 $body = $this->parser->subparse(array($this, 'isEndTag'), true);
             }
-
         } else {
             $stream->expect(Twig_Token::BLOCK_END_TYPE);
             $body = $this->parser->subparse(array($this, 'isEndTag'), true);
@@ -108,7 +108,7 @@ class PluralizeTokenParser
             $value = trim($value, "\n");
             $choices_values = explode('|', $value);
             $choices_table = array();
-            foreach($choices_values as $i=>$val) {
+            foreach ($choices_values as $i=>$val) {
                 $choices_table[] = new Twig_Node_Expression_Constant($i, $lineno);
                 $choices_table[] = new Twig_Node_Expression_Constant(trim($val), $lineno);
             }
@@ -141,7 +141,4 @@ exit('yo');
     {
         return $token->test('endpluralize');
     }
-
 }
-
-// Endfile

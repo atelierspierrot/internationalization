@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,19 +66,15 @@ class Csv
                             $all_lang_strings[$lang][$index] = $data[$d];
                         } else {
                             trigger_error(
-                                sprintf('Language string with index "%s" defined more than one time!', $index)
-                                , E_USER_NOTICE);
+                                sprintf('Language string with index "%s" defined more than one time!', $index), E_USER_NOTICE);
                         }
                     }
                 }
                 $line_count++;
-            }  
-            fclose($handle);  
+            }
+            fclose($handle);
         }
         
         return $all_lang_strings;
     }
-
 }
-
-// Endfile

@@ -2,7 +2,7 @@
 /**
  * This file is part of the Internationalization package.
  *
- * Copyright (c) 2010-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2010-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ class TranslateTokenParser
             while (!$stream->test(Twig_Token::BLOCK_END_TYPE)) {
                 $args[] = $this->parser->getExpressionParser()->parsePrimaryExpression();
             }
-            foreach($args as $i=>$node) {
+            foreach ($args as $i=>$node) {
                 if ($node instanceof Twig_Node_Expression_Array) {
                     $arguments = $node;
                 } elseif ($node instanceof Twig_Node_Expression_Constant) {
@@ -96,7 +96,6 @@ class TranslateTokenParser
                 $stream->expect(Twig_Token::BLOCK_END_TYPE);
                 $body = $this->parser->subparse(array($this, 'isEndTag'), true);
             }
-
         } else {
             $stream->expect(Twig_Token::BLOCK_END_TYPE);
             $body = $this->parser->subparse(array($this, 'isEndTag'), true);
@@ -122,7 +121,4 @@ class TranslateTokenParser
     {
         return $token->test('endtranslate');
     }
-
 }
-
-// Endfile
